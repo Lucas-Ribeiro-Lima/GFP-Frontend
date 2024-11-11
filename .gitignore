@@ -39,3 +39,6 @@ next-env.d.ts
 
 #Design files
 design.tldr
+
+#vscode debug configs
+.vscode/
