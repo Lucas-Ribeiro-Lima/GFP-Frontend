@@ -1,5 +1,6 @@
 'use client'
 
+import { SkeletonPages } from '@/components/skeleton/index'
 import { AuthContextProps, ContaProps } from '@/domain/types'
 import { UserContract } from '@/services/userService'
 import { createContext, useEffect, useState } from 'react'
@@ -27,6 +28,10 @@ export function AuthProvider({ children, userService }: AuthProviderProps) {
     loadUser()
     if (user === null) window.location.href = "/login"
   }, [])
+
+  if(!user) return(
+    <SkeletonPages.layout/>
+  )
 
   return (
       <AuthContext.Provider value={{user, logoff}}>
