@@ -4,10 +4,10 @@ export function middleware(request: NextRequest) {
   const session = request.cookies.get('SSID')
 
   return session 
-            ? response.rewrite(new URL("/dashboard", request.url)) 
+            ? null
             : response.rewrite(new URL('/login', request.url))
 }
 
 export const config = {
-  matcher: ['/', '/dashboard', '/preferencias', '/rendas', '/despesas'],
+  matcher: ['/', '/dashboard', '/preferencias', '/registros/:path*'],
 }
