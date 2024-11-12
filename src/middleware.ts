@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
 
   return session 
             ? null
-            : response.rewrite(new URL('/login', request.url))
+            : response.redirect(new URL('/login', request.url))
 }
 
 export const config = {
