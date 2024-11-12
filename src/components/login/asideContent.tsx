@@ -9,7 +9,7 @@ export const AsideContent = () => {
   const { push } = useRouter()
 
   return (
-    <aside className="flex flex-col space-y-8 items-center justify-center md:w-1/3 h-full border-r-black border-r-2">
+    <aside className="flex flex-col space-y-8 items-center justify-center md:w-1/3 h-full border-r-black border-r-2 bg-slate-300/40">
       <div className="md:hidden">
         <Logo></Logo>
       </div>
