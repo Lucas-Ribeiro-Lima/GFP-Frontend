@@ -40,11 +40,11 @@ type RegistrosActionsProps = {
   children?: React.ReactNode;
   variant?: "secondary" | "destructive" | "default";
   disabled?: boolean
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-export function RegistrosAction({children="Adicionar", variant = "secondary",  disabled = false}: RegistrosActionsProps) {
+export function RegistrosAction({children="Adicionar", variant = "secondary",  disabled = false, ...props}: RegistrosActionsProps) {
   return (
-    <Button variant={variant} disabled={disabled}>{children}</Button>
+    <Button variant={variant} disabled={disabled} {...props}>{children}</Button>
   )
 }
 
