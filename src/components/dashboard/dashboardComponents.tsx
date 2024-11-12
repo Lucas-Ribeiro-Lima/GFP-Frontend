@@ -25,12 +25,15 @@ export function DashboardTitle({ month }: DashboardProps) {
   return (
     <div className="flex justify-between">
       <h1>
-        <div className="flex gap-2 items-center">
-          Resumo de <strong>{month}</strong>
-          <ChevronDownCircle className="cursor-pointer" />
+        <div className="flex gap-2">
+          Resumo de 
+          <div className="flex gap-[1px] cursor-pointer hover:text-sky-500">
+          <strong>{month}</strong>
+            <ChevronDownCircle/>  
+          </div>
         </div>
       </h1>
-      <div className="flex items-center gap-2">expandir <ChevronDownCircle className="cursor-pointer" /></div>
+      <div className="flex items-center gap-2 cursor-pointer hover:text-sky-500">expandir <ChevronDownCircle/></div>
     </div>
   )
 }
