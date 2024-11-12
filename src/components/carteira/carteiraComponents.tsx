@@ -49,7 +49,7 @@ export function WalletDataItem({ children }: { children: React.ReactNode }) {
 
 export function WalletDataContent() {
   return (
-    <div className="grid grid-cols-4 grid-rows-12 bg-slate-300/50 rounded-sm p-2">
+    <div className="grid grid-cols-4 grid-rows-12 bg-slate-300/40 rounded-sm p-2">
       <div>Nome</div>
       <div>Data</div>
       <div>Valor</div>
