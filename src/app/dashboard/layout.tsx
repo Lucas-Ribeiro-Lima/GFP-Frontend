@@ -34,6 +34,7 @@ function LayoutContent({children}: {children: React.ReactNode}) {
     <>
       <Navbar.Wrapper>
         <Navbar.List>
+          <Navbar.Item><Link href="#">Dashboard</Link></Navbar.Item>
           <Navbar.Item><Link href="/registros/renda">Rendas</Link></Navbar.Item>
           <Navbar.Item><Link href="/registros/despesa">Despesas</Link></Navbar.Item>
           <Navbar.Item><Link href="#">Preferências</Link></Navbar.Item>
