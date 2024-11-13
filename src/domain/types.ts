@@ -1,10 +1,10 @@
 export type AuthContextProps =  {
-  user: ContaProps | null
+  user: ContaProps
   logoff: () => void
 }
 
 export type ContaProps = {
-  id?: number,
+  id: number,
   email: string,
   nome: string,
   cpf?: string,

@@ -1,9 +1,9 @@
 'use client'
 
-import { SkeletonPages } from '@/components/skeleton/index'
+import { SkeletonPages } from '@/components/skeleton'
 import { AuthContextProps, ContaProps } from '@/domain/types'
 import { UserContract } from '@/services/userService'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useCallback } from 'react'
 
 export const AuthContext = createContext({} as AuthContextProps)
 
@@ -13,23 +13,23 @@ export type AuthProviderProps = {
 } 
 
 export function AuthProvider({ children, userService }: AuthProviderProps) {
-  const [ user, setUser ] = useState<ContaProps | null>({} as ContaProps)
+  const [ user, setUser ] = useState<ContaProps | null>(null)
 
-  const logoff = async () => {
+  const logoff = useCallback(async () => {
     await userService.logout()
+    setUser(null)
     window.location.href = '/login'
-  }
-
+  }, [userService])
+  
+  const loadUser = useCallback(async () => {
+    setUser(await userService.load())
+  }, [userService])
+  
   useEffect(() => {
-    const loadUser = async () => {
-      const user = await userService.load()
-      setUser(user)
-    }
     loadUser()
-    if (user === null) window.location.href = "/login"
-  }, [])
+  }, [loadUser])
 
-  if(!user) return(
+  if(!user) return (
     <SkeletonPages.layout/>
   )
 

@@ -10,10 +10,5 @@ export type HttpRequest = {
 
 export type HttpResponse<T> = {
   status: number
-  data?: T 
-}
-
-export type HttpErrorResponse = {
-  type: string,
-  message: string
+  data?: T
 }

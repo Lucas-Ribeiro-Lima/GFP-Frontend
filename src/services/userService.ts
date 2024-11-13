@@ -14,15 +14,16 @@ export class UserService implements UserContract {
       url: `${process.env.NEXT_PUBLIC_API_URL}/conta/buscar`,
       method: "GET",
     })
-    
-    if(status === 200 || status === 201 || status === 204) {
+
+    if(status !== 200) {
+      return null
+    } {
       return data ? data : null
-    } 
-    return null
+    }
   }
   
   async logout() {
-    await this.client.request({
+    await this.client.request<void>({
       url: `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
       method: "POST",
     })
