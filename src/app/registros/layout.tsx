@@ -1,13 +1,13 @@
 'use client'
 
-import { Dashboard } from "@/components/dashboard"
 import { Header } from "@/components/header"
 import { Navbar } from "@/components/navbar"
 import { SkeletonPages } from "@/components/skeleton"
 import { AuthContext, AuthProvider } from "@/contexts/authContext"
-import { userService } from "@/services"
-import Link from "next/link"
+import { CarteiraProvider } from "@/contexts/carteiraContext"
+import { carteiraService, userService } from "@/services"
 import { Suspense, useContext } from "react"
+import Link from "next/link"
 
 export default function Layout({ children }: { children: React.ReactNode }) {	
   return (
@@ -15,7 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AuthProvider userService={userService}>
         <div className="flex flex-col h-full p-4 bg-gradient-to-br from-white via-sky-100 to-white">
             <LayoutContent>
-              {children}
+              <CarteiraProvider carteiraService={carteiraService}>
+                {children}
+              </CarteiraProvider>
             </LayoutContent>
         </div>
       </AuthProvider>
