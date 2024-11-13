@@ -63,3 +63,27 @@ export function RegistrosContentData({ children }: RegistrosProps) {
   </div>
  )
 }
+
+export function RegistrosSkeleton() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-between">
+        <div className="w-1/2 h-4 bg-gray-200 rounded"></div>
+        <div className="flex gap-4">
+          <div className="w-20 h-8 bg-gray-200 rounded"></div>
+          <div className="w-20 h-8 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+      <div className="flex gap-4">
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+      </div>
+      <div className="flex gap-4">
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+        <div className="w-20 h-8 bg-gray-200 rounded"></div>
+      </div>
+    </div>
+  )
+}

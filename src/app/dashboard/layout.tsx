@@ -13,7 +13,7 @@ import Link from "next/link"
 
 export default function Layout({children}: {children: React.ReactNode}) {
   return (
-    <Suspense fallback={<SkeletonPages.dashboard/>}>
+    <Suspense fallback={<SkeletonPages.layout/>}>
       <AuthProvider userService={userService}>
         <div className="flex flex-col h-full p-4 bg-gradient-to-br from-white via-sky-100 to-white">
             <LayoutContent>
