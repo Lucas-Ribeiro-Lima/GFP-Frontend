@@ -50,7 +50,7 @@ export function RegistrosAction({children="Adicionar", variant = "secondary",  d
 
 export function RegistrosContentWrapper({ children }: RegistrosProps) {
   return (
-    <div className="flex-1 mt-2 p-4 rounded-sm">
+    <div className="flex flex-1 mt-2 rounded-sm">
       {children}
     </div>
   )
@@ -58,7 +58,7 @@ export function RegistrosContentWrapper({ children }: RegistrosProps) {
 
 export function RegistrosContentData({ children }: RegistrosProps) {
  return (
-  <div>
+  <div className="flex flex-1">
     {children}
   </div>
  )

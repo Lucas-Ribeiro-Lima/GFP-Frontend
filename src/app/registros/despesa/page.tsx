@@ -1,7 +1,48 @@
 import { Dashboard } from "@/components/dashboard";
 import { Registro } from "@/components/registros";
+import { columns } from "./columns";
+import { DespesaProps } from "@/domain/types";
 
 export default function Despesa() {
+  const mockData: DespesaProps[] = [
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Moradia",
+      valor: 250,
+      modalidade: "fixo",
+      categoria: "alimentacao",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Moradia",
+      valor: 250,
+      modalidade: "fixo",
+      categoria: "alimentacao",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Moradia",
+      valor: 250,
+      modalidade: "fixo",
+      categoria: "alimentacao",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Moradia",
+      valor: 250,
+      modalidade: "fixo",
+      categoria: "alimentacao",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+  ];
+
   return (
     <main className="flex flex-col flex-1">
         <Dashboard.ResumeWrapper>
@@ -19,7 +60,9 @@ export default function Despesa() {
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>
-              <Registro.ContentData>Registro</Registro.ContentData>
+              <Registro.ContentData>
+                <Registro.DataTable  columns={columns} data={mockData}></Registro.DataTable>
+              </Registro.ContentData>
             </Registro.ContentWrapper>
           </Registro.Wrapper>    
         </div>

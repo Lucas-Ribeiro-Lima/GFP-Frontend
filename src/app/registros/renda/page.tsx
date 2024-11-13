@@ -1,7 +1,57 @@
 import { Dashboard } from "@/components/dashboard";
 import { Registro } from "@/components/registros";
+import { RendaProps } from "@/domain/types";
+import { columns } from "./columns";
 
 export default function Renda() {
+  const mockData: RendaProps[] = [
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Salário Mensal",
+      valor: 5000,
+      modalidade: "fixo",
+      frequencia: "mensal",
+      fonte: "Salário",
+      categoria: "salario",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Salário Mensal",
+      valor: 5000,
+      modalidade: "fixo",
+      frequencia: "mensal",
+      fonte: "Salário",
+      categoria: "salario",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Salário Mensal",
+      valor: 5000,
+      modalidade: "fixo",
+      frequencia: "mensal",
+      fonte: "Salário",
+      categoria: "salario",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+    {
+      uuid: "0",
+      idCarteira: 1,
+      descricao: "Salário Mensal",
+      valor: 5000,
+      modalidade: "fixo",
+      frequencia: "mensal",
+      fonte: "Salário",
+      categoria: "salario",
+      competencia: { mes: 10, ano: 2024, dataInclusao: "2024-10-01" },
+    },
+  ];
+
+
   return (
     <main className="flex flex-col flex-1">
         <Dashboard.ResumeWrapper>
@@ -19,7 +69,9 @@ export default function Renda() {
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>
-              <Registro.ContentData>Registro</Registro.ContentData>
+              <Registro.ContentData>
+                <Registro.DataTable  columns={columns} data={mockData}></Registro.DataTable>
+              </Registro.ContentData>
             </Registro.ContentWrapper>
           </Registro.Wrapper>    
         </div>
