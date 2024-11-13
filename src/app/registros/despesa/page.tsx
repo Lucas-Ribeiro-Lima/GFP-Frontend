@@ -10,7 +10,7 @@ export default function Despesa() {
             <Dashboard.TotalItem icon={Dashboard.Icon({ variant: "Despesa" })} dataTitle="Despesas" dataValue="250" />
           </Dashboard.TotalWrapper>
         </Dashboard.ResumeWrapper>
-        <div className="flex flex-1 m-8 p-4 rounded-sm bg-slate-300/50">
+        <div className="flex flex-1 m-8 p-4 rounded-sm bg-slate-300/50 shadow-md shadow-white">
           <Registro.Wrapper>
             <Registro.Header title="Despesas">
               <Registro.ActionsWrapper>

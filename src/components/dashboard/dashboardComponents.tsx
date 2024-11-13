@@ -50,7 +50,7 @@ export function DashboardTotalItem({ icon, dataTitle, dataValue }: DashboardResu
   const value = formatCurrency(dataValue)
 
   return (
-    <div className="flex gap-2 items-center p-2 rounded-md bg-slate-300/50">
+    <div className="flex gap-2 items-center p-2 rounded-md bg-slate-300/50 shadow-sm shadow-white">
       <div className="h-4/5 aspect-square">
         {icon}
       </div>

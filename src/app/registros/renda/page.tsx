@@ -10,7 +10,7 @@ export default function Renda() {
             <Dashboard.TotalItem icon={Dashboard.Icon({ variant: "Renda" })} dataTitle="Rendas" dataValue="1900" />
           </Dashboard.TotalWrapper>
         </Dashboard.ResumeWrapper>
-        <div className="flex flex-1 m-8 p-4 rounded-sm bg-slate-300/50">
+        <div className="flex flex-1 m-8 p-4 rounded-sm bg-slate-300/50 shadow-md shadow-white">
           <Registro.Wrapper>
             <Registro.Header title="Rendas">
               <Registro.ActionsWrapper>

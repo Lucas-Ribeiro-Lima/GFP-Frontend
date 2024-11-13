@@ -55,7 +55,7 @@ function LayoutContent({children}: {children: React.ReactNode}) {
               <Dashboard.TotalItem icon={Dashboard.Icon({ variant: "Total" })} dataTitle="Total" dataValue="1650" />
             </Dashboard.TotalWrapper>
           </Dashboard.ResumeWrapper>
-          <div className="flex-1 m-8 p-4 rounded-sm bg-slate-300/50">
+          <div className="flex-1 m-8 p-4 rounded-sm bg-slate-300/50 shadow-md shadow-white">
             <Wallet.DataWrapper>
               <Wallet.DataWrapper>
                 <Wallet.DataItem>
