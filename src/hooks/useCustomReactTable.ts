@@ -1,5 +1,5 @@
 import { ColumnDef, ColumnFiltersState, getCoreRowModel, getFilteredRowModel, useReactTable, VisibilityState } from "@tanstack/react-table"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 
 export interface DataTableProps<TData, TValue> {

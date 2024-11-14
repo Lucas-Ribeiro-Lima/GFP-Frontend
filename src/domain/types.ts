@@ -63,6 +63,10 @@ export type RendaProps = RegistroProps & {
   categoria: enumCategoriaRenda
 }
 
+export type ApiResponse = {
+  message: string
+}
+
 type enumFrequencia = 'mensal' | 'trimestral' | 'semestral' | 'anual'
 
 type enumCategoriaRenda = 'salario' | 'investimento' | 'bonus' | 'outros'

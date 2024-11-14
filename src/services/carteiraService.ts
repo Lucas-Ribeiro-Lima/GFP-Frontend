@@ -36,7 +36,7 @@ export class CarteiraService implements CarteiraContract {
         compartilhada: false,
       }
     }    
-    const { status, data } = await this.client.request<ServiceResponse>({
+    const { status } = await this.client.request({
       url: "/carteira/criar",
       method: 'POST',
       content: carteiraData,

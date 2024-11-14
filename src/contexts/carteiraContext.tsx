@@ -2,7 +2,7 @@
 
 import { SkeletonPages } from '@/components/skeleton';
 import { CarteiraProps } from '@/domain/types';
-import { useToast } from '@/hooks/use-toast';
+import { useCustomToast } from '@/hooks/useCustomToast';
 import { CarteiraContract } from '@/services/carteiraService';
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from './authContext';
@@ -15,7 +15,7 @@ type CarteiraProviderProps = {
 }
 
 export function CarteiraProvider({ children, carteiraService }: CarteiraProviderProps) {
-  const { toast } = useToast()
+  const { toaster } = useCustomToast()
   const { user } = useContext(AuthContext)
   const [ carteira, setCarteira ] = useState<CarteiraProps | null>(null)
 
@@ -24,11 +24,8 @@ export function CarteiraProvider({ children, carteiraService }: CarteiraProvider
     if(loadedCarteira) {
       setCarteira(loadedCarteira);
     } else {
-      const { message, type } = await carteiraService.create(user.id)
-      toast({
-        title: message,
-        variant: (type === 'success') ? 'default' : 'destructive'
-      })
+      const { type, message } = await carteiraService.create(user.id)
+      toaster({ type, message})
     }
   }, [carteiraService, user.id])
 
