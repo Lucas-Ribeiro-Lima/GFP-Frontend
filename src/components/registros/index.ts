@@ -1,6 +1,6 @@
 import { DataTable } from '@/components/registros/data-table'
 import { RegistrosAction, RegistrosActionsWrapper, RegistrosContentData, RegistrosContentWrapper, RegistrosHeader, RegistrosWrapper, } from '@/components/registros/registrosComponents'
-import { LinkCell } from '@/components/registros/tableComponents'
+import { DialogContent, LinkCell } from '@/components/registros/tableComponents'
 
 
 export const Registro = {
@@ -12,6 +12,7 @@ export const Registro = {
   ContentData: RegistrosContentData,
   DataTable: DataTable,
   TableComponents: {
-    Link: LinkCell
+    Link: LinkCell,
+    Dialog: DialogContent
   }
 }

@@ -56,7 +56,6 @@ export default function Despesa() {
             <Registro.Header title="Despesas">
               <Registro.ActionsWrapper>
                 <Registro.Action variant="secondary"></Registro.Action>
-                <Registro.Action variant="destructive" disabled>Excluir</Registro.Action>
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>

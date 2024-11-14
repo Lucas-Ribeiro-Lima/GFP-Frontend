@@ -65,7 +65,6 @@ export default function Renda() {
             <Registro.Header title="Rendas">
               <Registro.ActionsWrapper>
                 <Registro.Action variant="secondary"></Registro.Action>
-                <Registro.Action variant="destructive" disabled>Excluir</Registro.Action>
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>

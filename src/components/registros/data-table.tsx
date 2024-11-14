@@ -1,14 +1,9 @@
 "use client"
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  useReactTable,
-  VisibilityState,
+  flexRender
 } from "@tanstack/react-table"
+import { DataTableProps, useCustomReactTable } from "@/hooks/useCustomReactTable"
 
 import {
   Table,
@@ -18,108 +13,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { TopContentTable } from "./tableComponents"
 
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-
-import { ChevronDown } from "lucide-react"
-
-import { useState } from "react"
-import { formatCurrency } from "@/lib/utils"
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-}
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      columnVisibility,
-      columnFilters,
-    }
-  })
+  const { table } = useCustomReactTable({ data, columns })
 
   return (
     <div className="flex-1">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <div className="flex items-center py-4">
-            <Input
-              placeholder="Filtrar descrição..."
-              value={(table.getColumn("descricao")?.getFilterValue() as string) ?? ""}
-              onChange={(event) =>
-                table.getColumn("descricao")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm bg-white focus-visible:ring-none"
-            />
-          </div>
-          <div className="flex items-center py-4">
-            <Input
-              placeholder="Filtrar categoria..."
-              value={(table.getColumn("categoria")?.getFilterValue() as string) ?? ""}
-              onChange={(event) =>
-                table.getColumn("categoria")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm bg-white focus-visible:ring-none"
-            />
-          </div>
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="
-                shadow-none
-                hover:border-none 
-                focus-visible:ring-transparent
-                hover:text-sky-500
-              ">
-              <ChevronDown/>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter(
-                (column) => column.getCanHide()
-              )
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      <TopContentTable table={table}></TopContentTable>
       <div className="rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-slate-400/30 rounded-md focus-visible:bg-slate-400/30">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
