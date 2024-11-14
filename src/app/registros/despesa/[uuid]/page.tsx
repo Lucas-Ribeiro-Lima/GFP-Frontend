@@ -1,3 +1,5 @@
+'use client'
+
 import { Registro } from "@/components/registros";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";

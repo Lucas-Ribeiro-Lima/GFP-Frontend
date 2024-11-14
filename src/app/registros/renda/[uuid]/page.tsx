@@ -19,7 +19,9 @@ export default function Renda() {
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>
-              <Registro.ContentData>Registro</Registro.ContentData>
+              <Registro.ContentData>
+                <Registro.RendaForm/>
+              </Registro.ContentData>
             </Registro.ContentWrapper>
           </Registro.Wrapper>    
         </div>

@@ -10,7 +10,7 @@ type DashboardProps = {
 
 type DashboardResumeItemProps = DashboardProps & {
   dataTitle: string,
-  dataValue: string
+  dataValue: string | number
 }
 
 export function DashboardResumeWrapper({ children }: DashboardProps) {

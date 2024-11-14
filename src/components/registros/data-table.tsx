@@ -23,9 +23,9 @@ export function DataTable<TData, TValue>({
   const { table } = useCustomReactTable({ data, columns })
 
   return (
-    <div className="flex-1">
+    <div className="flex flex-col flex-1">
       <TopContentTable table={table}></TopContentTable>
-      <div className="rounded-md border">
+      <div className="flex-1 rounded-md border">
         <Table>
           <TableHeader className="bg-slate-400/30 rounded-md focus-visible:bg-slate-400/30">
             {table.getHeaderGroups().map((headerGroup) => (
