@@ -4,20 +4,25 @@ import {
 	DropdownMenuContent,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Table } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-import { 
+import {
 	DialogContent as DialogContentShadcn,
-	DialogFooter, 
-	DialogHeader, 
-	DialogDescription, 
-	DialogTitle 
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle
 } from "../ui/dialog";
-	
+
+import { Table } from "@tanstack/react-table";
+
+
+import { ChevronDown } from "lucide-react";
+
 import Link from "next/link";
+import { useCallback, useState } from "react";
 
 export function LinkCell({ uuid }: { uuid: string }) {
 	return(
@@ -95,7 +100,20 @@ export function TopContentTable<T>({ table }: { table: Table<T> }) {
 	)
 }
 
-export function DialogContent({ onSubmit }: { onSubmit: () => void}) {
+type DialogDeleteContentProps = {
+	uuid: string
+	service: (uuid: string) => Promise<void>
+}
+
+export function DialogDeleteContent({ uuid, service }: DialogDeleteContentProps) {	
+	const [ processing, setProcessing ] = useState(false)
+	
+	const onClick = useCallback(async () => {
+		setProcessing(true)
+		await service(uuid)
+		setProcessing(false)
+	}, [service])
+
 	return(
 		<DialogContentShadcn>
 			<DialogHeader>
@@ -106,8 +124,27 @@ export function DialogContent({ onSubmit }: { onSubmit: () => void}) {
 				</DialogDescription>
 			</DialogHeader>
 			<DialogFooter>
-				<Button type="submit" onSubmit={onSubmit}>Confirm</Button>
+				<div className="text-sm text-zinc-400">{uuid}</div>
+				<Button type="button" onClick={onClick} disabled={processing}>Confirm</Button>
 			</DialogFooter>
   	</DialogContentShadcn>
+	)
+}
+
+type DialogEditContentProps = {
+	type?: "Edição" | "Inclusão"
+	title: string,
+	children: React.ReactNode
+}
+
+export function DialogContent({ type = "Inclusão", title, children }: DialogEditContentProps) {
+	return(
+		<DialogContentShadcn>
+			<DialogTitle>{type} de {title}</DialogTitle>
+			<div className="hidden">
+				<DialogDescription>{type} de {title}</DialogDescription>
+			</div>
+			{children}	
+		</DialogContentShadcn>
 	)
 }

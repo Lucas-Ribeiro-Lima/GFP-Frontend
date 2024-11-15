@@ -10,7 +10,7 @@ export class AxiosHttpClient implements HttpClient {
         url: url,
         method: method,
         data: (method !== 'GET') ? content : null,
-        responseType: "json"
+        responseType: "json",
       })
   
       return {

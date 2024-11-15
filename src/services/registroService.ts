@@ -40,10 +40,12 @@ export class RendaService implements RendaContract {
     const { status } = await this.client.request({
       method: "POST",
       url: "/renda/criar",
-      content: data
+      content: {
+        renda: data
+      }
     })
 
-    if(status === 200) {
+    if(status === 201) {
       return {
         type: "success",
         message: "Renda cadastrada com sucesso"
@@ -59,8 +61,10 @@ export class RendaService implements RendaContract {
   async patch(data: RendaProps): Promise<ServiceResponse> {
     const { status } = await this.client.request({
       method: "PATCH",
-      url: "/renda/criar",
-      content: data
+      url: "/renda/atualizar",
+      content: {
+        renda: data
+      }
     })
 
     if(status === 200) {
@@ -83,7 +87,7 @@ export class RendaService implements RendaContract {
 
     const { status } = await this.client.request({
       method: "DELETE",
-      url: "/renda/deletar",
+      url: "/renda/excluir",
       content: body
     })
 
@@ -124,11 +128,13 @@ export class DespesaService implements DespesaContract {
   async create(data: DespesaProps): Promise<ServiceResponse> {
     const { status } = await this.client.request({
       method: "POST",
-      url: "/depesa/criar",
-      content: data
+      url: "/despesa/criar",
+      content: {
+        despesa: data
+      }
     })
 
-    if(status === 200) {
+    if(status === 201) {
       return {
         type: "success",
         message: "Despesa cadastrada com sucesso"
@@ -144,8 +150,10 @@ export class DespesaService implements DespesaContract {
   async patch(data: DespesaProps): Promise<ServiceResponse> {
     const { status } = await this.client.request({
       method: "PATCH",
-      url: "/despesa/criar",
-      content: data
+      url: "/despesa/atualizar",
+      content: {
+        despesa: data
+      }
     })
 
     if(status === 200) {
@@ -168,7 +176,7 @@ export class DespesaService implements DespesaContract {
 
     const { status } = await this.client.request({
       method: "DELETE",
-      url: "/Despesa/deletar",
+      url: "/despesa/excluir",
       content: body
     })
 

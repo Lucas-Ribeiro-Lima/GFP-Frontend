@@ -4,13 +4,9 @@ import { Dashboard } from "@/components/dashboard";
 import { Registro } from "@/components/registros";
 import { useDespesa } from "@/hooks/useDespesa";
 import { despesaService } from "@/services";
-import { columns } from "./columns";
-import { useRouter } from "next/navigation";
 
 export default function Despesa() {
-  const { despesas, valorTotal } = useDespesa(despesaService);
-  const { push } = useRouter()
-
+  const { despesas, columns, valorTotal, acoes: { criarDespesa } } = useDespesa(despesaService);
   return (
     <main className="flex flex-col flex-1">
         <Dashboard.ResumeWrapper>
@@ -22,10 +18,11 @@ export default function Despesa() {
         <div className="flex flex-1 m-8 p-4 rounded-sm bg-slate-300/50 shadow-md shadow-white">
           <Registro.Wrapper>
             <Registro.Header title="Despesas">
-              <Registro.ActionsWrapper>
-                <Registro.Action variant="secondary" onClick={() => push("despesa/0")}>
-                  Adicionar
-                </Registro.Action>
+            <Registro.ActionsWrapper>
+                <Registro.ActionContent>Adicionar</Registro.ActionContent>      
+                <Registro.TableComponents.DialogContent title="Despesa">
+                  <Registro.DespesaForm service={criarDespesa}/>
+                </Registro.TableComponents.DialogContent>
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>

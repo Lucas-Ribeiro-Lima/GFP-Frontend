@@ -5,7 +5,7 @@ export const registroSchema = z.object({
   uuid: z.string(),
   idCarteira: z.number(),
   descricao: z.string(),
-  valor: z.number(),
+  valor: z.coerce.number(),
   competencia: z.object({
     mes: z.number(),
     ano: z.number(),
@@ -19,8 +19,8 @@ export const registroSchema = z.object({
 export const rendaFormSchema =  z.object({
   uuid: z.string(),
   idCarteira: z.number(),
-  descricao: z.string(),
-  valor: z.coerce.number(),
+  descricao: z.string({message: "Insira uma descrição para a renda"}),
+  valor: z.coerce.number({message: "Insira um valor para a renda"}),
   competencia: z.object({
     mes: z.number(),
     ano: z.number(),
@@ -37,7 +37,7 @@ export const despesaFormSchema =  z.object({
   uuid: z.string(),
   idCarteira: z.number(),
   descricao: z.string(),
-  valor: z.number(),
+  valor: z.coerce.number(),
   competencia: z.object({
     mes: z.number(),
     ano: z.number(),
@@ -45,6 +45,6 @@ export const despesaFormSchema =  z.object({
   }),
   modalidade: z.enum(['fixo', 'variavel']),
   parcelado: z.boolean(),
-  numParcelas: z.number(),
+  numParcelas: z.coerce.number(),
   categoria: z.enum(['alimentacao', 'educacao', 'lazer', 'moradia', 'outros', 'saude', 'transporte'])
 })

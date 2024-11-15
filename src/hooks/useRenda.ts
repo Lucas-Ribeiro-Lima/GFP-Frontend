@@ -2,6 +2,7 @@ import { RendaProps } from "@/domain/types"
 import { RendaService } from "@/services/registroService"
 import { useState, useEffect, useCallback } from "react"
 import { useCustomToast } from "./useCustomToast"
+import { ColumsRenda } from "@/components/registros/columnsRenda"
 
 export function useRenda(service: RendaService) {
   const { toaster } = useCustomToast()
@@ -49,5 +50,7 @@ export function useRenda(service: RendaService) {
     deletarRenda,
   }
 
-  return { rendas, valorTotal, acoes }
+  const columns = ColumsRenda({ editSubmit: atualizarRenda, deleteSubmit: deletarRenda })
+  
+  return { rendas, columns, valorTotal, acoes }
 }

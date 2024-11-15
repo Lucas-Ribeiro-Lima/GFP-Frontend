@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 
 type RegistrosProps = {
   children: React.ReactNode;
@@ -30,21 +30,19 @@ export function RegistrosHeader({ children,  title }: RegistrosHeaderProps) {
 
 export function RegistrosActionsWrapper({ children }: RegistrosProps) {
   return (
-    <div className="flex gap-4">
-      {children}
-    </div>
+    <Dialog>
+      <div className="flex gap-4">
+        {children}
+      </div>
+    </Dialog>
   )
 }
 
-type RegistrosActionsProps = {
-  children?: React.ReactNode;
-  variant?: "secondary" | "destructive" | "default";
-  disabled?: boolean
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
-
-export function RegistrosAction({children="Adicionar", variant = "secondary",  disabled = false, ...props}: RegistrosActionsProps) {
+export function RegistrosActionContent({ children }: RegistrosProps) {
   return (
-    <Button variant={variant} disabled={disabled} {...props}>{children}</Button>
+    <DialogTrigger className="bg-slate-100 rounded-md text-sm shadow-white shadow-sm p-3 pt-2 pb-2">
+      {children}
+    </DialogTrigger>
   )
 }
 
@@ -58,7 +56,7 @@ export function RegistrosContentWrapper({ children }: RegistrosProps) {
 
 export function RegistrosContentData({ children }: RegistrosProps) {
  return (
-  <div className="flex flex-1">
+  <div className="flex flex-1 justify-center">
     {children}
   </div>
  )

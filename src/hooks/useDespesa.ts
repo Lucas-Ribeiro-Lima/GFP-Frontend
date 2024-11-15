@@ -2,6 +2,7 @@ import { DespesaProps } from "@/domain/types"
 import { DespesaService } from "@/services/registroService"
 import { useCallback, useEffect, useState } from "react"
 import { useCustomToast } from "./useCustomToast"
+import { ColumnsDespesa } from "@/components/registros/columnsDespesa"
 
 export function useDespesa(service: DespesaService) {
   const { toaster } = useCustomToast()
@@ -48,5 +49,7 @@ export function useDespesa(service: DespesaService) {
     deletarDespesa,
   }
 
-  return { despesas, valorTotal, acoes }
+  const columns = ColumnsDespesa({ editSubmit: atualizarDespesa, deleteSubmit: deletarDespesa })
+
+  return { despesas, valorTotal, columns, acoes }
 }

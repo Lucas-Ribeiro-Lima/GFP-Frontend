@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -25,36 +26,36 @@ import {
 import { CarteiraContext } from "@/contexts/carteiraContext";
 import { useCallback, useContext, useState } from "react";
 
-import { rendaFormSchema } from "@/adapters/zod/registros";
-import { RendaProps } from "@/domain/types";
+import { despesaFormSchema } from "@/adapters/zod/registros";
+import { DespesaProps } from "@/domain/types";
 import { getMonthIndex } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-type RendaFormProps = {
-  renda?: RendaProps
-  service: (values: RendaProps) => Promise<void>
+type DespesaFormProps = {
+  despesa?: DespesaProps
+  service: (values: DespesaProps) => Promise<void>
 }
 
-export function RendaForm({ renda, service }: RendaFormProps) {
+export function DespesaForm({ despesa, service }: DespesaFormProps) {
   const { id } = useContext(CarteiraContext)
   const [ processing, setProcessing ] = useState(false)
 
-  const form = useForm<RendaProps>({
-    resolver: zodResolver(rendaFormSchema),
+  const form = useForm<DespesaProps>({
+    resolver: zodResolver(despesaFormSchema),
     defaultValues: {
-      uuid: renda?.uuid || "00000000-0000-0000-0000-000000000000",
+      uuid: despesa?.uuid || "00000000-0000-0000-0000-000000000000",
       idCarteira: id || undefined,
-      descricao: renda?.descricao ||"",
-      fonte: renda?.fonte || "",
-      valor: renda?.valor || 0.00,
-      categoria: renda?.categoria || "outros",
-      frequencia: renda?.frequencia || "mensal",
-      modalidade: renda?.modalidade || "fixo",
+      descricao: despesa?.descricao ||"",
+      valor: despesa?.valor || 0.00,
+      categoria: despesa?.categoria || "outros",
+      numParcelas: despesa?.numParcelas || 1,
+      parcelado: despesa?.parcelado || false,
+      modalidade: despesa?.modalidade || "fixo",
       competencia: {
-        mes: renda?.competencia.mes || new Date().getMonth(),
-        ano: renda?.competencia.ano || new Date().getFullYear(),
-        dataInclusao: renda?.competencia.dataInclusao || new Date().toLocaleDateString("pt-BR")
+        mes: despesa?.competencia.mes || new Date().getMonth(),
+        ano: despesa?.competencia.ano || new Date().getFullYear(),
+        dataInclusao: despesa?.competencia.dataInclusao || new Date().toLocaleDateString("pt-BR")
       }
     },
 
@@ -70,9 +71,9 @@ export function RendaForm({ renda, service }: RendaFormProps) {
             <div className="hidden">
               <FormLabel>Descrição</FormLabel>
             </div>
-            <FormDescription>Descrição da sua renda</FormDescription>
+            <FormDescription>Descrição da sua despesa</FormDescription>
             <FormControl className="bg-white">
-              <Input placeholder="Descrição de sua renda" {...field} />
+              <Input placeholder="Descrição de sua despesa" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -108,6 +109,32 @@ export function RendaForm({ renda, service }: RendaFormProps) {
     )
   }
 
+  function NumParcelasInput() {
+    return (
+      <FormField
+        control={form.control}
+        name="numParcelas"
+        render={({ field }) => (
+          <FormItem>
+            <div className="hidden">
+              <FormLabel>N° de parcelas</FormLabel>
+            </div>
+            <FormDescription>N° de parcelas:</FormDescription>
+            <FormControl className="bg-white">
+              <Input
+                type="number"
+                min={1}
+                max={64}
+                placeholder="1 parcela"
+                {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    )
+  }
+
   function CategoriaSelector() {
     return (
       <FormField
@@ -122,13 +149,16 @@ export function RendaForm({ renda, service }: RendaFormProps) {
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl className="bg-white">
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione a categoria da renda" />
+                  <SelectValue placeholder="Selecione a categoria da despesa" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem value="salario">Salário</SelectItem>
-                <SelectItem value="aluguel">Aluguel</SelectItem>
-                <SelectItem value="premio">Prêmio</SelectItem>
+                <SelectItem value="alimentacao">Alimentação</SelectItem>
+                <SelectItem value="educacao">Educação</SelectItem>
+                <SelectItem value="lazer">Lazer</SelectItem>
+                <SelectItem value="moradia">Moradia</SelectItem>
+                <SelectItem value="transporte">Tranporte</SelectItem>
+                <SelectItem value="saude">Saúde</SelectItem>
                 <SelectItem value="outros">Outros</SelectItem>
               </SelectContent>
             </Select>
@@ -138,30 +168,24 @@ export function RendaForm({ renda, service }: RendaFormProps) {
     )
   }
 
-  function FrequenciaSelector() {
+  function ParceladoCheckbox() {
     return (
       <FormField
         control={form.control}
-        name="frequencia"
+        name="parcelado"
         render={({ field }) => (
-          <FormItem className="flex-1">
+          <FormItem>
             <div className="hidden">
-              <FormLabel>Frequencia</FormLabel>
+              <FormLabel>Parcelado</FormLabel>
             </div>
-            <FormDescription>Frequência:</FormDescription>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl className="bg-white">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a verified email to display" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="mensal">Mensal</SelectItem>
-                <SelectItem value="trimestral">Trimestral</SelectItem>
-                <SelectItem value="semestral">Semestral</SelectItem>
-                <SelectItem value="anual">Anual</SelectItem>
-              </SelectContent>
-            </Select>
+            <FormDescription>Parcelado:</FormDescription>
+            <FormControl>
+              <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+            </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -263,7 +287,7 @@ export function RendaForm({ renda, service }: RendaFormProps) {
     )
   }
 
-  const onSubmit = useCallback(async (values: RendaProps) => {
+  const onSubmit = useCallback(async (values: DespesaProps) => {
     setProcessing(true)
     await service(values)
     setProcessing(false)
@@ -282,8 +306,11 @@ export function RendaForm({ renda, service }: RendaFormProps) {
         </div>
         <div className="flex gap-2">
           <CategoriaSelector />
-          <FrequenciaSelector />
           <ModalidadeRadioGroup />
+        </div>
+        <div className="flex space-x-4">
+          <ParceladoCheckbox />
+          <NumParcelasInput />
         </div>
         <CompetenciaSelector />
         <div className="flex justify-between">

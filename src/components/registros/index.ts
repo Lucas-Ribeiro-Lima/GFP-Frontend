@@ -1,20 +1,23 @@
 import { DataTable } from '@/components/registros/data-table'
-import { RegistrosAction, RegistrosActionsWrapper, RegistrosContentData, RegistrosContentWrapper, RegistrosHeader, RegistrosWrapper, } from '@/components/registros/registrosComponents'
-import { DialogContent, LinkCell } from '@/components/registros/tableComponents'
+import { RegistrosActionContent, RegistrosActionsWrapper, RegistrosContentData, RegistrosContentWrapper, RegistrosHeader, RegistrosWrapper, } from '@/components/registros/registrosComponents'
 import { RendaForm } from '@/components/registros/renda/form'
+import { DialogContent, DialogDeleteContent, LinkCell } from '@/components/registros/tableComponents'
+import { DespesaForm } from './despesa/form'
 
 
 export const Registro = {
   Wrapper: RegistrosWrapper,
   Header: RegistrosHeader,
   ActionsWrapper: RegistrosActionsWrapper,
-  Action: RegistrosAction,
+  ActionContent: RegistrosActionContent,
   ContentWrapper: RegistrosContentWrapper,
   ContentData: RegistrosContentData,
   DataTable: DataTable,
   TableComponents: {
     Link: LinkCell,
-    Dialog: DialogContent
+    DialogContent: DialogContent,
+    DialogDelete: DialogDeleteContent
   },
-  RendaForm: RendaForm
+  RendaForm: RendaForm,
+  DespesaForm: DespesaForm,
 }

@@ -2,14 +2,25 @@
 
 import { Dashboard } from "@/components/dashboard";
 import { Registro } from "@/components/registros";
-import { columns } from "./columns";
 import { useRenda } from "@/hooks/useRenda";
 import { rendaService } from "@/services";
-import { useRouter } from "next/navigation";
 
 export default function Renda() {
-  const { rendas, valorTotal } = useRenda(rendaService);
-  const { push } = useRouter()
+  const {  rendas, columns, valorTotal, acoes: { criarRenda }  } = useRenda(rendaService);
+
+  // const rendasMock: RendaProps[] = [
+  //   {
+  //     uuid: '558a2291-6c20-44c1-b699-37a077ead39f',
+  //     descricao: 'Salário',
+  //     valor: 2000,
+  //     categoria: 'salario',
+  //     frequencia: 'trimestral',
+  //     modalidade: 'fixo',
+  //     fonte: "",
+  //     idCarteira: 1,
+  //     competencia: { mes: 11, ano: 2021, dataInclusao: new Date().toString() }
+  //   },
+  // ]
 
   return (
     <main className="flex flex-col flex-1">
@@ -23,11 +34,10 @@ export default function Renda() {
           <Registro.Wrapper>
             <Registro.Header title="Rendas">
               <Registro.ActionsWrapper>
-                <Registro.Action 
-                  variant="secondary" 
-                  onClick={() => push("renda/0")}>
-                    Adicionar
-                </Registro.Action>
+                <Registro.ActionContent>Adicionar</Registro.ActionContent>      
+                <Registro.TableComponents.DialogContent title="rendas">
+                  <Registro.RendaForm service={criarRenda}/>
+                </Registro.TableComponents.DialogContent>
               </Registro.ActionsWrapper>
             </Registro.Header>
             <Registro.ContentWrapper>

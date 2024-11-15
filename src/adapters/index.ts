@@ -5,7 +5,7 @@ import { AxiosHttpClient } from "./axios/axiosHttpClient"
 
 export const axiosDefault = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
-  withCredentials: true
+  withCredentials: true,
 })
 
 const axiosHttpClient = new AxiosHttpClient(axiosDefault)
