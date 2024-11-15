@@ -7,6 +7,7 @@ import { despesaService } from "@/services";
 
 export default function Despesa() {
   const { despesas, columns, valorTotal, acoes: { criarDespesa } } = useDespesa(despesaService);
+  
   return (
     <main className="flex flex-col flex-1">
         <Dashboard.ResumeWrapper>

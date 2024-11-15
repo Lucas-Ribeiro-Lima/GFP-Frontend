@@ -27,7 +27,7 @@ export function CarteiraProvider({ children, carteiraService }: CarteiraProvider
       const { type, message } = await carteiraService.create(user.id)
       toaster({ type, message})
     }
-  }, [carteiraService, user.id])
+  }, [carteiraService, toaster, user.id])
 
   useEffect(() => {
     loadCarteira()

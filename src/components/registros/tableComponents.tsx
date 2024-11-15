@@ -112,7 +112,7 @@ export function DialogDeleteContent({ uuid, service }: DialogDeleteContentProps)
 		setProcessing(true)
 		await service(uuid)
 		setProcessing(false)
-	}, [service])
+	}, [service, uuid])
 
 	return(
 		<DialogContentShadcn>
