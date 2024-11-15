@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -10,7 +11,6 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -31,6 +31,8 @@ import { DespesaProps } from "@/domain/types";
 import { getMonthIndex } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
+import { FormComponents } from '@/components/registros/form/index'
 
 type DespesaFormProps = {
   despesa?: DespesaProps
@@ -60,6 +62,8 @@ export function DespesaForm({ despesa, service }: DespesaFormProps) {
     },
 
   })
+
+  
 
   function DescricaoInput() {
     return (
@@ -301,7 +305,7 @@ export function DespesaForm({ despesa, service }: DespesaFormProps) {
       >
         <div className="text-sm text-zinc-400">{form.getValues("uuid")}</div>
         <div className="flex gap-2">
-          <DescricaoInput />
+          <FormComponents.DescricaoInput form={form} fieldName="descricao" label="descrição" description="Descrição da sua despesa"/>
           <ValorInput />
         </div>
         <div className="flex gap-2">

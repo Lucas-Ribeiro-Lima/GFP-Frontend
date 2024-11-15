@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/ui/checkbox"
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -5,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getMonthIndex } from "@/lib/utils"
 import { FieldValues, UseFormReturn } from "react-hook-form"
 
-type FormComponentsProps = {
+type FormComponentsProps<T> = {
   form: UseFormReturn<FieldValues>
   fieldName: string
   label: string
@@ -24,7 +25,7 @@ export function DescricaoInput({ form, fieldName, description, label }: FormComp
           </div>
           <FormDescription>{description}</FormDescription>
           <FormControl className="bg-white">
-            <Input placeholder="Descrição de sua renda" {...field} />
+            <Input placeholder={`Descrição da sua ${label}`} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -81,7 +82,7 @@ export function CategoriaSelector({ form, fieldName, label, description, valores
           <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl className="bg-white">
               <SelectTrigger>
-                <SelectValue placeholder="Selecione a categoria da renda" />
+                <SelectValue placeholder={`Selecione a categoria da sua ${label}`} />
               </SelectTrigger>
             </FormControl>
             <SelectContent>
@@ -221,7 +222,7 @@ export function CompetenciaSelector({ form }: FormComponentsProps) {
   )
 }
 
-export function NumParcelasInput({ form, fieldName, label, description}: FormComponentsProps) {
+export function NumInput({ form, fieldName, label, description}: FormComponentsProps) {
   return (
     <FormField
       control={form.control}
@@ -239,6 +240,30 @@ export function NumParcelasInput({ form, fieldName, label, description}: FormCom
               max={64}
               placeholder="1 parcela"
               {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  )
+}
+
+export function BooleanCheckbox({ form, fieldName, label, description }: FormComponentsProps) {
+  return (
+    <FormField
+      control={form.control}
+      name={fieldName}
+      render={({ field }) => (
+        <FormItem>
+          <div className="hidden">
+            <FormLabel>{label}</FormLabel>
+          </div>
+          <FormDescription>{description}</FormDescription>
+          <FormControl>
+            <Checkbox
+                checked={field.value}
+                onCheckedChange={field.onChange}
+              />
           </FormControl>
           <FormMessage />
         </FormItem>
