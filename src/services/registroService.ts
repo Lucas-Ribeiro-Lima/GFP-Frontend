@@ -18,7 +18,7 @@ export interface DespesaContract {
 }
 
 export class RendaService implements RendaContract {
-  constructor(private client: HttpClient) {}
+  constructor(private readonly client: HttpClient) {}
 
   async load(): Promise<RendaProps[] | []> {
     const { status, data } = await this.client.request<RendaProps[] | []>({
@@ -107,7 +107,7 @@ export class RendaService implements RendaContract {
 
 
 export class DespesaService implements DespesaContract {
-  constructor(private client: HttpClient) {}
+  constructor(private readonly client: HttpClient) {}
 
   async load(): Promise<DespesaProps[] | []> {
     const { status, data } = await this.client.request<DespesaProps[] | []>({

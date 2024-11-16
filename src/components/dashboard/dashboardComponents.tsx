@@ -3,17 +3,11 @@ import { ChevronDownCircle, CircleCheck, DollarSign } from "lucide-react"
 import { Skeleton } from "../ui/skeleton"
 
 type DashboardProps = {
-  icon?: React.ReactNode
   children?: React.ReactNode
-  month?: string
 }
 
-type DashboardResumeItemProps = DashboardProps & {
-  dataTitle: string,
-  dataValue: string | number
-}
 
-export function DashboardResumeWrapper({ children }: DashboardProps) {
+export function DashboardResumeWrapper({ children }: Readonly<DashboardProps>) {
   return (
     <div className="m-8 mt-4 mb-0">
       {children}
@@ -21,7 +15,11 @@ export function DashboardResumeWrapper({ children }: DashboardProps) {
   )
 }
 
-export function DashboardTitle({ month }: DashboardProps) {
+type DashBoardTitleProps = {
+  month?: string
+}
+
+export function DashboardTitle({ month }: Readonly<DashBoardTitleProps>) {
   return (
     <div className="flex justify-between">
       <h1>
@@ -38,7 +36,7 @@ export function DashboardTitle({ month }: DashboardProps) {
   )
 }
 
-export function DashboardTotalWrapper({ children }: DashboardProps) {
+export function DashboardTotalWrapper({ children }: Readonly<DashboardProps>) {
   return (
     <section className="grid grid-cols-3 gap-2 mt-2">
       {children}
@@ -46,7 +44,13 @@ export function DashboardTotalWrapper({ children }: DashboardProps) {
   )
 }
 
-export function DashboardTotalItem({ icon, dataTitle, dataValue }: DashboardResumeItemProps) {
+type DashboardResumeItemProps = DashboardProps & {
+  icon?: React.ReactNode
+  dataTitle: string,
+  dataValue: string | number
+}
+
+export function DashboardTotalItem({ icon, dataTitle, dataValue }: Readonly<DashboardResumeItemProps>) {
   const value = formatCurrency(dataValue)
 
   return (
@@ -66,7 +70,7 @@ type DashboardResumeIconProps = {
   variant: "Renda" | "Despesa" | "Total"
 }
 
-export function DashboardTotalIcon({ variant }: DashboardResumeIconProps ) {
+export function DashboardTotalIcon({ variant }: Readonly<DashboardResumeIconProps> ) {
   const icon = {
     "Renda": <DollarSign className="h-full w-full text-green-400 bg-green-900/90 rounded-sm" />,
     "Despesa": <DollarSign className="h-full w-full text-red-400 bg-red-900/90 rounded-sm" />,

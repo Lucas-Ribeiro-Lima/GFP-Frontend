@@ -12,7 +12,7 @@ export type AuthProviderProps = {
   userService: UserContract
 } 
 
-export function AuthProvider({ children, userService }: AuthProviderProps) {
+export function AuthProvider({ children, userService }: Readonly<AuthProviderProps>) {
   const [ user, setUser ] = useState<ContaProps | null>(null)
 
   const logoff = useCallback(async () => {
@@ -30,7 +30,7 @@ export function AuthProvider({ children, userService }: AuthProviderProps) {
   }, [loadUser])
 
   if(!user) return (
-    <SkeletonPages.layout/>
+    <SkeletonPages.Layout/>
   )
 
   return (

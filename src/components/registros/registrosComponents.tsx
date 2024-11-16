@@ -4,7 +4,7 @@ type RegistrosProps = {
   children: React.ReactNode;
 }
 
-export function RegistrosWrapper({ children }: RegistrosProps) {
+export function RegistrosWrapper({ children }: Readonly<RegistrosProps>) {
   return (
     <div className="flex flex-1 flex-col">
       {children}
@@ -17,7 +17,7 @@ type RegistrosHeaderProps = {
   title: "Rendas" | "Despesas";
 }
 
-export function RegistrosHeader({ children,  title }: RegistrosHeaderProps) {
+export function RegistrosHeader({ children,  title }: Readonly<RegistrosHeaderProps>) {
   return (
     <div className="flex justify-between ">
       <strong>{title}</strong>
@@ -28,7 +28,7 @@ export function RegistrosHeader({ children,  title }: RegistrosHeaderProps) {
   )
 }
 
-export function RegistrosActionsWrapper({ children }: RegistrosProps) {
+export function RegistrosActionsWrapper({ children }: Readonly<RegistrosProps>) {
   return (
     <Dialog>
       <div className="flex gap-4">
@@ -38,7 +38,7 @@ export function RegistrosActionsWrapper({ children }: RegistrosProps) {
   )
 }
 
-export function RegistrosActionContent({ children }: RegistrosProps) {
+export function RegistrosActionContent({ children }: Readonly<RegistrosProps>) {
   return (
     <DialogTrigger className="bg-slate-100 rounded-md text-sm shadow-white shadow-sm p-3 pt-2 pb-2">
       {children}
@@ -46,7 +46,7 @@ export function RegistrosActionContent({ children }: RegistrosProps) {
   )
 }
 
-export function RegistrosContentWrapper({ children }: RegistrosProps) {
+export function RegistrosContentWrapper({ children }: Readonly<RegistrosProps>) {
   return (
     <div className="flex flex-1 mt-2 rounded-sm">
       {children}
@@ -54,7 +54,7 @@ export function RegistrosContentWrapper({ children }: RegistrosProps) {
   )
 }
 
-export function RegistrosContentData({ children }: RegistrosProps) {
+export function RegistrosContentData({ children }: Readonly<RegistrosProps>) {
  return (
   <div className="flex flex-1 justify-center">
     {children}

@@ -4,7 +4,7 @@ type WalletProps = {
   children?: React.ReactNode
 }
 
-export function WalletWrapper({ children }: WalletProps) {
+export function WalletWrapper({ children }: Readonly<WalletProps>) {
   return (
     <div>
       <h1 className="flex items-center gap-2">
@@ -18,7 +18,7 @@ export function WalletWrapper({ children }: WalletProps) {
   )
 }
 
-export function WalletDataWrapper({ children }: WalletProps) {
+export function WalletDataWrapper({ children }: Readonly<WalletProps>) {
   return (
     <section className="flex flex-1 m-2 gap-2">
       {children}
@@ -31,7 +31,7 @@ type WalletDataProps = WalletProps & {
   dataTitle: string
 }
 
-export function WalletDataTitle({ dataTitle, variant = "Renda" }: WalletDataProps) {
+export function WalletDataTitle({ dataTitle, variant = "Renda" }: Readonly<WalletDataProps>) {
   const title = {
     Renda: <h2 className="text-xl font-bold text-sky-700">{dataTitle}</h2>,
     Despesa: <h2 className="text-xl font-bold text-red-700">{dataTitle}</h2>,
@@ -39,7 +39,7 @@ export function WalletDataTitle({ dataTitle, variant = "Renda" }: WalletDataProp
   return title[variant]
 }
 
-export function WalletDataItem({ children }: { children: React.ReactNode }) {
+export function WalletDataItem({ children }: Readonly<WalletProps>) {
   return (
     <section className="flex-1">
       {children}

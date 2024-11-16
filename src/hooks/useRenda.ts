@@ -2,7 +2,7 @@ import { RendaProps } from "@/domain/types"
 import { RendaService } from "@/services/registroService"
 import { useState, useEffect, useCallback } from "react"
 import { useCustomToast } from "./useCustomToast"
-import { ColumsRenda } from "@/components/registros/columnsRenda"
+import { ColumsRenda } from "@/components/registros/renda/columnsRenda"
 
 export function useRenda(service: RendaService) {
   const { toaster } = useCustomToast()

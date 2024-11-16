@@ -10,7 +10,7 @@ export interface DataTableProps<TData, TValue> {
 export function useCustomReactTable<TData, TValue>({
   data,
   columns,
-}: DataTableProps<TData, TValue>) {
+}: Readonly<DataTableProps<TData, TValue>>) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   

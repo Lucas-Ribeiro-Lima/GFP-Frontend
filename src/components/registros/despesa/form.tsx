@@ -1,45 +1,21 @@
 'use client'
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-import { CarteiraContext } from "@/contexts/carteiraContext";
-import { useCallback, useContext, useState } from "react";
-
 import { despesaFormSchema } from "@/adapters/zod/registros";
+import { FormComponents } from '@/components/registros/form/index';
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { CarteiraContext } from "@/contexts/carteiraContext";
 import { DespesaProps } from "@/domain/types";
-import { getMonthIndex } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-
-import { FormComponents } from '@/components/registros/form/index'
 
 type DespesaFormProps = {
   despesa?: DespesaProps
   service: (values: DespesaProps) => Promise<void>
 }
 
-export function DespesaForm({ despesa, service }: DespesaFormProps) {
+export function DespesaForm({ despesa, service }: Readonly<DespesaFormProps>) {
   const { id } = useContext(CarteiraContext)
   const [ processing, setProcessing ] = useState(false)
 
@@ -63,233 +39,36 @@ export function DespesaForm({ despesa, service }: DespesaFormProps) {
 
   })
 
-  
-
-  function DescricaoInput() {
-    return (
-      <FormField
-        control={form.control}
-        name="descricao"
-        render={({ field }) => (
-          <FormItem className="w-3/4">
-            <div className="hidden">
-              <FormLabel>Descrição</FormLabel>
-            </div>
-            <FormDescription>Descrição da sua despesa</FormDescription>
-            <FormControl className="bg-white">
-              <Input placeholder="Descrição de sua despesa" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function ValorInput() {
-    return (
-      <FormField
-        control={form.control}
-        name="valor"
-        render={({ field }) => (
-          <FormItem>
-            <div className="hidden">
-              <FormLabel>Valor</FormLabel>
-            </div>
-            <FormDescription>Valor:</FormDescription>
-            <FormControl className="bg-white">
-              <Input
-                type="number"
-                min={0.00}
-                max={100000000.00}
-                step={0.01}
-                placeholder="R$ 0,00"
-                {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function NumParcelasInput() {
-    return (
-      <FormField
-        control={form.control}
-        name="numParcelas"
-        render={({ field }) => (
-          <FormItem>
-            <div className="hidden">
-              <FormLabel>N° de parcelas</FormLabel>
-            </div>
-            <FormDescription>N° de parcelas:</FormDescription>
-            <FormControl className="bg-white">
-              <Input
-                type="number"
-                min={1}
-                max={64}
-                placeholder="1 parcela"
-                {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function CategoriaSelector() {
-    return (
-      <FormField
-        control={form.control}
-        name="categoria"
-        render={({ field }) => (
-          <FormItem className="flex-1">
-            <div className="hidden">
-              <FormLabel>Categoria</FormLabel>
-            </div>
-            <FormDescription>Categoria:</FormDescription>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl className="bg-white">
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione a categoria da despesa" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="alimentacao">Alimentação</SelectItem>
-                <SelectItem value="educacao">Educação</SelectItem>
-                <SelectItem value="lazer">Lazer</SelectItem>
-                <SelectItem value="moradia">Moradia</SelectItem>
-                <SelectItem value="transporte">Tranporte</SelectItem>
-                <SelectItem value="saude">Saúde</SelectItem>
-                <SelectItem value="outros">Outros</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function ParceladoCheckbox() {
-    return (
-      <FormField
-        control={form.control}
-        name="parcelado"
-        render={({ field }) => (
-          <FormItem>
-            <div className="hidden">
-              <FormLabel>Parcelado</FormLabel>
-            </div>
-            <FormDescription>Parcelado:</FormDescription>
-            <FormControl>
-              <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function ModalidadeRadioGroup() {
-    return (
-      <FormField
-        control={form.control}
-        name="modalidade"
-        render={({ field }) => (
-          <FormItem>
-            <div className="hidden">
-              <FormLabel>Tipo</FormLabel>
-            </div>
-            <FormDescription>Tipo:</FormDescription>
-            <FormControl>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                className="flex-1 items-center"
-              >
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value="fixo" />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    Fixo
-                  </FormLabel>
-                </FormItem>
-                <FormItem className="flex items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <RadioGroupItem value="variavel" />
-                  </FormControl>
-                  <FormLabel className="font-normal">
-                    Variavel
-                  </FormLabel>
-                </FormItem>
-              </RadioGroup>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    )
-  }
-
-  function CompetenciaSelector() {
-    const meses = getMonthIndex()
-
-    return (
-      <div className="flex gap-2">
-        <FormField
-          control={form.control}
-          name="competencia.mes"
-          render={({ field }) => (
-            <FormItem className="flex-1">
-              <div className="hidden">
-                <FormLabel>Mês</FormLabel>
-              </div>
-              <FormDescription>Mês:</FormDescription>
-              <Select onValueChange={(val) => field.onChange(Number(val))} defaultValue={(field.value + 1).toString()}>
-                <FormControl className="bg-white">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione o mês"/>
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {meses.map((month, index) => (
-                    <SelectItem key={index} value={(index + 1).toString()}>{month}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="competencia.ano"
-          render={({ field }) => (
-            <FormItem>
-              <div className="hidden">
-                <FormLabel>Ano</FormLabel>
-              </div>
-              <FormDescription>Ano:</FormDescription>
-              <FormControl className="bg-white">
-                <Input
-                  type="number"
-                  min={2000}
-                  max={new Date().getFullYear() + 10}
-                  placeholder="2024"
-                  {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )} />
-      </div>
-    )
-  }
+  const categoriaArray = useMemo(() => [
+    {
+      value: "alimentacao",
+      label: "Alimentação"
+    },
+    {
+      value: "educacao", 
+      label: "Educação"
+    },
+    {
+      value: "lazer",
+      label: "Lazer"
+    },
+    {
+      value: "moradia",
+      label: "Moradia"
+    },
+    {
+      value: "transporte",
+      label: "Transporte"
+    },
+    {
+      value: "saude",
+      label: "Saúde"
+    },
+    {
+      value: "outros",
+      label: "Outros"
+    }
+  ], [])
 
   const onSubmit = useCallback(async (values: DespesaProps) => {
     setProcessing(true)
@@ -306,17 +85,17 @@ export function DespesaForm({ despesa, service }: DespesaFormProps) {
         <div className="text-sm text-zinc-400">{form.getValues("uuid")}</div>
         <div className="flex gap-2">
           <FormComponents.DescricaoInput form={form} fieldName="descricao" label="descrição" description="Descrição da sua despesa"/>
-          <ValorInput />
+          <FormComponents.ValorInput form={form} fieldName="valor" label="Valor" description="Valor"/>
         </div>
         <div className="flex gap-2">
-          <CategoriaSelector />
-          <ModalidadeRadioGroup />
+          <FormComponents.CategoriaSelector form={form} fieldName="categoria" label="Categoria" valores={categoriaArray} description="Categoria" />
+          <FormComponents.ModalidadeRadioGroup form={form} fieldName="modalidade" label="Tipo" description="Tipo"/>
         </div>
         <div className="flex space-x-4">
-          <ParceladoCheckbox />
-          <NumParcelasInput />
+          <FormComponents.BooleanCheckbox form={form} fieldName="parcelado" label="Parcelado" description="Parcelado" />
+          <FormComponents.NumInput form={form} fieldName="numParcelas" label="numero de parcelas" description="N° de parcelas"/>
         </div>
-        <CompetenciaSelector />
+        <FormComponents.CompetenciaSelector form={form} fieldName="competencia"/>
         <div className="flex justify-between">
           <div className="text-sm text-zinc-400">Data de inclusão: {form.getValues("competencia.dataInclusao")}</div>
           <Button type="submit" disabled={processing}>Cadastrar</Button>

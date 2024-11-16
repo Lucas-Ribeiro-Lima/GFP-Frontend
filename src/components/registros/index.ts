@@ -1,7 +1,7 @@
-import { DataTable } from '@/components/registros/data-table'
+import { DataTable } from '@/components/registros/dataTable'
 import { RegistrosActionContent, RegistrosActionsWrapper, RegistrosContentData, RegistrosContentWrapper, RegistrosHeader, RegistrosWrapper, } from '@/components/registros/registrosComponents'
 import { RendaForm } from '@/components/registros/renda/form'
-import { DialogContent, DialogDeleteContent, LinkCell } from '@/components/registros/tableComponents'
+import { DespesaActionRows, DialogContent, DialogDeleteContent, LinkCell, RendaActionRows } from '@/components/registros/tableComponents'
 import { DespesaForm } from './despesa/form'
 
 
@@ -16,7 +16,11 @@ export const Registro = {
   TableComponents: {
     Link: LinkCell,
     DialogContent: DialogContent,
-    DialogDelete: DialogDeleteContent
+    DialogDelete: DialogDeleteContent,
+    ActionsRows: {
+      Renda: RendaActionRows,
+      Despesa: DespesaActionRows
+    }
   },
   RendaForm: RendaForm,
   DespesaForm: DespesaForm,

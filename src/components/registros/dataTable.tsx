@@ -19,7 +19,7 @@ import { TopContentTable } from "./tableComponents"
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: Readonly<DataTableProps<TData, TValue>>) {
   const { table } = useCustomReactTable({ data, columns })
 
   return (

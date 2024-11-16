@@ -4,7 +4,7 @@ type NavProps = {
   children: React.ReactNode
 }
 
-export function NavWrapper({ children }: NavProps) {
+export function NavWrapper({ children }: Readonly<NavProps>) {
   return (
     <nav className="flex w-full justify-end">
       { children }
@@ -12,7 +12,7 @@ export function NavWrapper({ children }: NavProps) {
   )
 }
 
-export function NavList({ children }: NavProps) {
+export function NavList({ children }: Readonly<NavProps>) {
   return (
     <ol className="flex gap-4 text-sm text-slate-600">
       { children }
@@ -20,7 +20,7 @@ export function NavList({ children }: NavProps) {
   )
 }
 
-export function NavItem({ children }: NavProps) {
+export function NavItem({ children }: Readonly<NavProps>) {
   return (
     <li className="hover:text-sky-500 cursor-pointer">
       { children }

@@ -2,7 +2,6 @@
 
 import { Wallet } from "@/components/carteira"
 
-
 export default function Page() {
   return (
     <>

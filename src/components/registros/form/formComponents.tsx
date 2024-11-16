@@ -4,16 +4,15 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { getMonthIndex } from "@/lib/utils"
-import { FieldValues, UseFormReturn } from "react-hook-form"
 
-type FormComponentsProps<T> = {
-  form: UseFormReturn<FieldValues>
+type FormComponentsProps = {
+  form: any
   fieldName: string
-  label: string
+  label?: string
   description?: string
 }
 
-export function DescricaoInput({ form, fieldName, description, label }: FormComponentsProps) {
+export function DescricaoInput({ form, fieldName, description, label }: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}
@@ -25,7 +24,7 @@ export function DescricaoInput({ form, fieldName, description, label }: FormComp
           </div>
           <FormDescription>{description}</FormDescription>
           <FormControl className="bg-white">
-            <Input placeholder={`Descrição da sua ${label}`} {...field} />
+            <Input placeholder={`Descrição do seu registro`} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -34,7 +33,7 @@ export function DescricaoInput({ form, fieldName, description, label }: FormComp
   )
 }
 
-export function ValorInput({ form, fieldName, description, label }: FormComponentsProps) {
+export function ValorInput({ form, fieldName, description, label }: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}
@@ -68,7 +67,7 @@ type CategoriaSelectorProps = FormComponentsProps & {
   }>
 }
 
-export function CategoriaSelector({ form, fieldName, label, description, valores }: CategoriaSelectorProps) {
+export function CategoriaSelector({ form, fieldName, label, description, valores }: Readonly<CategoriaSelectorProps>) {
   return (
     <FormField
       control={form.control}
@@ -98,7 +97,7 @@ export function CategoriaSelector({ form, fieldName, label, description, valores
 }
 
 
-export function FrequenciaSelector({ form, description, label, fieldName }: FormComponentsProps) {
+export function FrequenciaSelector({ form, description, label, fieldName }: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}
@@ -128,7 +127,7 @@ export function FrequenciaSelector({ form, description, label, fieldName }: Form
   )
 }
 
-export function ModalidadeRadioGroup({ form, fieldName, label, description }: FormComponentsProps) {
+export function ModalidadeRadioGroup({ form, fieldName, label, description }: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}
@@ -170,7 +169,7 @@ export function ModalidadeRadioGroup({ form, fieldName, label, description }: Fo
   )
 }
 
-export function CompetenciaSelector({ form }: FormComponentsProps) {
+export function CompetenciaSelector({ form }: Readonly<FormComponentsProps>) {
   const meses = getMonthIndex()
   return (
     <div className="flex gap-2">
@@ -222,7 +221,7 @@ export function CompetenciaSelector({ form }: FormComponentsProps) {
   )
 }
 
-export function NumInput({ form, fieldName, label, description}: FormComponentsProps) {
+export function NumInput({ form, fieldName, label, description}: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}
@@ -248,7 +247,7 @@ export function NumInput({ form, fieldName, label, description}: FormComponentsP
   )
 }
 
-export function BooleanCheckbox({ form, fieldName, label, description }: FormComponentsProps) {
+export function BooleanCheckbox({ form, fieldName, label, description }: Readonly<FormComponentsProps>) {
   return (
     <FormField
       control={form.control}

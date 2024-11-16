@@ -9,7 +9,7 @@ export interface CarteiraContract {
 }
 
 export class CarteiraService implements CarteiraContract {
-  constructor(private client: HttpClient) {}
+  constructor(private readonly client: HttpClient) {}
 
   async load(): Promise<CarteiraProps | null> {
     const { status, data } = await this.client.request<CarteiraProps>({
@@ -18,7 +18,7 @@ export class CarteiraService implements CarteiraContract {
     })
   
     if(status === 200) {
-      return data ? data : null
+      return data ?? null
     } else {
       return null
     }

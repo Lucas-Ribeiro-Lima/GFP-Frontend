@@ -2,7 +2,7 @@ import { AxiosError, AxiosInstance } from "axios";
 import { HttpClient, HttpRequest, HttpResponse } from "../httpClient";
 
 export class AxiosHttpClient implements HttpClient {
-  constructor(private client: AxiosInstance) {}
+  constructor(private readonly client: AxiosInstance) {}
   
   async request<T>({ url, method, content }: HttpRequest): Promise<HttpResponse<T>> {
     try {

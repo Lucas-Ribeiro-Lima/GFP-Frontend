@@ -7,7 +7,7 @@ export interface UserContract {
 }
 
 export class UserService implements UserContract {
-  constructor(private client: HttpClient) {}
+  constructor(private readonly client: HttpClient) {}
   
   async load() {
     const { status, data } = await this.client.request<ContaProps>({
@@ -17,8 +17,8 @@ export class UserService implements UserContract {
 
     if(status !== 200) {
       return null
-    } {
-      return data ? data : null
+    } else {
+      return data ?? null
     }
   }
   

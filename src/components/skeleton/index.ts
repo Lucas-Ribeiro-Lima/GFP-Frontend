@@ -3,9 +3,9 @@ import { DashboardSkeleton } from "../dashboard/dashboardComponents";
 import { HeaderSkeleton } from "../header/header";
 import { NavSkeleton } from "../navbar/navComponents";
 import { RegistrosSkeleton } from '../registros/registrosComponents';
+import { DashboardPageSkeleton } from './dashboard';
 import { LayoutSkeleton } from "./layout";
 import { RegistrosPageSkeleton } from './registro';
-import { DashboardPageSkeleton } from './dashboard';
 
 export const SkeletonComponents = {
   Base: BaseSkeleton,
@@ -16,7 +16,7 @@ export const SkeletonComponents = {
 }
 
 export const SkeletonPages = {
-  layout: LayoutSkeleton,
-  dashboard: DashboardPageSkeleton,
-  registros: RegistrosPageSkeleton
+  Layout: LayoutSkeleton,
+  Dashboard: DashboardPageSkeleton,
+  Registros: RegistrosPageSkeleton
 }

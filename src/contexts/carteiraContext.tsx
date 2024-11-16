@@ -14,7 +14,7 @@ type CarteiraProviderProps = {
   carteiraService: CarteiraContract
 }
 
-export function CarteiraProvider({ children, carteiraService }: CarteiraProviderProps) {
+export function CarteiraProvider({ children, carteiraService }: Readonly<CarteiraProviderProps>) {
   const { toaster } = useCustomToast()
   const { user } = useContext(AuthContext)
   const [ carteira, setCarteira ] = useState<CarteiraProps | null>(null)
@@ -35,7 +35,7 @@ export function CarteiraProvider({ children, carteiraService }: CarteiraProvider
   
 
   if(!carteira) return(
-    <SkeletonPages.registros/>
+    <SkeletonPages.Registros/>
   )
 
   return (

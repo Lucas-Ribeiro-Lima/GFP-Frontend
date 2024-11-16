@@ -2,29 +2,29 @@ import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-
 import {
+	Dialog,
 	DialogContent as DialogContentShadcn,
 	DialogDescription,
 	DialogFooter,
 	DialogHeader,
-	DialogTitle
+	DialogTitle,
+	DialogTrigger
 } from "../ui/dialog";
-
-import { Table } from "@tanstack/react-table";
-
-
-import { ChevronDown } from "lucide-react";
-
+import { Row, Table } from "@tanstack/react-table";
+import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { DespesaProps, RendaProps } from "@/domain/types";
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { Registro } from ".";
 
-export function LinkCell({ uuid }: { uuid: string }) {
+export function LinkCell({ uuid }: Readonly<{ uuid: string }>) {
 	return(
 		<Link 
 		href={`/registros/renda/${uuid}`} 
@@ -37,8 +37,7 @@ export function LinkCell({ uuid }: { uuid: string }) {
 	)
 }
 
-
-export function TopContentTable<T>({ table }: { table: Table<T> }) {
+export function TopContentTable<T>({ table }: Readonly<{ table: Table<T> }>) {
 	return(
 		<div className="flex items-center justify-between">
 			<div className="flex gap-2">
@@ -105,7 +104,7 @@ type DialogDeleteContentProps = {
 	service: (uuid: string) => Promise<void>
 }
 
-export function DialogDeleteContent({ uuid, service }: DialogDeleteContentProps) {	
+export function DialogDeleteContent({ uuid, service }:  Readonly<DialogDeleteContentProps>) {	
 	const [ processing, setProcessing ] = useState(false)
 	
 	const onClick = useCallback(async () => {
@@ -137,7 +136,7 @@ type DialogEditContentProps = {
 	children: React.ReactNode
 }
 
-export function DialogContent({ type = "Inclusão", title, children }: DialogEditContentProps) {
+export function DialogContent({ type = "Inclusão", title, children }:  Readonly<DialogEditContentProps>) {
 	return(
 		<DialogContentShadcn>
 			<DialogTitle>{type} de {title}</DialogTitle>
@@ -147,4 +146,99 @@ export function DialogContent({ type = "Inclusão", title, children }: DialogEdi
 			{children}	
 		</DialogContentShadcn>
 	)
+}
+
+type ActionsRowProps<T> = {
+	deleteSubmit: (uuid: string) => Promise<void>
+	editSubmit: (data: T) => Promise<void>
+}
+
+export function RendaActionRows({ editSubmit, deleteSubmit }: Readonly<ActionsRowProps<RendaProps>>) {
+	 const row = ({ row }: { row: Row<RendaProps>}) => {
+		const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
+
+		const renda = row.original
+		return (
+			<Dialog>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
+							<MoreHorizontal className="h-4 w-4 " />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DialogTrigger asChild onClick={() => setModalOption("edit")}>
+							<DropdownMenuItem  className="cursor-pointer">
+									Editar
+							</DropdownMenuItem>
+						</DialogTrigger>
+						<DropdownMenuSeparator />
+						<DialogTrigger asChild onClick={() => setModalOption("delete")}>
+							<DropdownMenuItem
+								className="
+									bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
+									focus-visible:text-white text-white
+									cursor-pointer"
+							>
+								Excluir
+							</DropdownMenuItem>
+						</DialogTrigger>
+					</DropdownMenuContent>
+					{ modalOption === "delete" && (
+						<Registro.TableComponents.DialogDelete uuid={renda.uuid} service={deleteSubmit}/>
+					)}
+					{ modalOption === "edit" && (
+						<Registro.TableComponents.DialogContent type="Edição" title="rendas">
+							<Registro.RendaForm renda={renda} service={editSubmit}/>
+						</Registro.TableComponents.DialogContent>
+					)}
+				</DropdownMenu>
+			</Dialog>
+		)}
+	return row
+}
+
+export function DespesaActionRows({ editSubmit, deleteSubmit }: Readonly<ActionsRowProps<DespesaProps>>) {
+	const row =  ({ row }: { row: Row<DespesaProps>}) => {
+		const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
+
+		const despesa = row.original
+		return (
+			<Dialog>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
+							<MoreHorizontal className="h-4 w-4 " />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DialogTrigger asChild onClick={() => setModalOption("edit")}>
+							<DropdownMenuItem  className="cursor-pointer">
+									Editar
+							</DropdownMenuItem>
+						</DialogTrigger>
+						<DropdownMenuSeparator />
+						<DialogTrigger asChild onClick={() => setModalOption("delete")}>
+							<DropdownMenuItem
+								className="
+									bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
+									focus-visible:text-white text-white
+									cursor-pointer"
+							>
+								Excluir
+							</DropdownMenuItem>
+						</DialogTrigger>
+					</DropdownMenuContent>
+					{ modalOption === "delete" && (
+						<Registro.TableComponents.DialogDelete uuid={despesa.uuid} service={deleteSubmit}/>
+					)}
+					{ modalOption === "edit" && (
+						<Registro.TableComponents.DialogContent type="Edição" title="rendas">
+							<Registro.DespesaForm despesa={despesa} service={editSubmit}/>
+						</Registro.TableComponents.DialogContent>
+					)}
+				</DropdownMenu>
+			</Dialog>
+		)}
+	return row
 }

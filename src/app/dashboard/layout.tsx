@@ -1,19 +1,20 @@
 'use client'
 
+import Link from "next/link"
+
 import { Wallet } from "@/components/carteira"
 import { Dashboard } from "@/components/dashboard"
 import { Header } from "@/components/header"
 import { Navbar } from "@/components/navbar"
 import { SkeletonPages } from "@/components/skeleton"
 import { AuthContext, AuthProvider } from "@/contexts/authContext"
-import { userService } from "@/services/index"
+import { userService } from "@/services"
 import { Suspense, useContext } from "react"
-import Link from "next/link"
 
 
-export default function Layout({children}: {children: React.ReactNode}) {
+export default function Layout({children}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <Suspense fallback={<SkeletonPages.layout/>}>
+    <Suspense fallback={<SkeletonPages.Layout/>}>
       <AuthProvider userService={userService}>
         <div className="flex flex-col h-full p-4 bg-gradient-to-br from-white via-sky-100 to-white">
             <LayoutContent>
@@ -25,7 +26,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
   )
 }
 
-function LayoutContent({children}: {children: React.ReactNode}) {
+function LayoutContent({children}: Readonly<{ children: React.ReactNode }>) {
   const { user, logoff } = useContext(AuthContext)
 
   const userInitials = user?.nome?.replace(/(\b\w)\w*.*\b(\w)\w*/g, '$1$2').toUpperCase()
