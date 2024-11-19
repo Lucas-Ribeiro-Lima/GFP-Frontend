@@ -1,3 +1,5 @@
+import { HeaderFull } from "@/components/header/headerFull"
+import { NavbarFull } from "@/components/navbar/navbarFull"
 import { SkeletonPages } from "@/components/skeleton"
 import { AuthProvider } from "@/contexts/authContext"
 import { CarteiraProvider } from "@/contexts/carteiraContext"
@@ -10,7 +12,9 @@ export default function Layout({children}: {children: React.ReactNode}) {
     <Suspense fallback={<SkeletonPages.layout/>}>
       <AuthProvider userService={userService}>
         <CarteiraProvider carteiraService={carteiraService}>
-          <div className="flex flex-col h-full p-4 bg-gradient-to-br from-white via-sky-100 to-white">
+          <div className="p-4">
+            <NavbarFull/>
+            <HeaderFull/>
             {children}
           </div>
         </CarteiraProvider>
