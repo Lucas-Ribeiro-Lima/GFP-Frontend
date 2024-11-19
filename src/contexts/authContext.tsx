@@ -3,7 +3,7 @@
 import { SkeletonPages } from '@/components/skeleton'
 import { AuthContextProps, ContaProps } from '@/domain/types'
 import { UserContract } from '@/services/userService'
-import { createContext, useEffect, useState, useCallback } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 
 export const AuthContext = createContext({} as AuthContextProps)
 
@@ -14,6 +14,11 @@ export type AuthProviderProps = {
 
 export function AuthProvider({ children, userService }: Readonly<AuthProviderProps>) {
   const [ user, setUser ] = useState<ContaProps | null>(null)
+  
+  const userInitials = useMemo(
+    () => user?.nome?.replace(/(\b\w)\w*.*\b(\w)\w*/g, '$1$2').toUpperCase() || "CN"
+ ,[user])
+
 
   const logoff = useCallback(async () => {
     await userService.logout()
@@ -34,7 +39,7 @@ export function AuthProvider({ children, userService }: Readonly<AuthProviderPro
   )
 
   return (
-      <AuthContext.Provider value={{user, logoff}}>
+      <AuthContext.Provider value={{user, userInitials, logoff}}>
         {children}
       </AuthContext.Provider>
   )

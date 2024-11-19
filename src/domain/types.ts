@@ -3,6 +3,7 @@ import { z } from "zod"
 
 export type AuthContextProps =  {
   user: ContaProps
+  userInitials: string
   logoff: () => void
 }
 
