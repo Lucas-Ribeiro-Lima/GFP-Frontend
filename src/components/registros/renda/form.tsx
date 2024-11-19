@@ -47,12 +47,12 @@ export function RendaForm({ renda, service }: Readonly<RendaFormProps>) {
      label: "Salário"
     },
     {
-      value: "aluguel",
-      label: "Aluguel"
+      value: "investimento",
+      label: "Investimento"
     },
     {
-      value: "premio",
-      label: "Prêmio"
+      value: "bonus",
+      label: "Bonus"
     },
     {
       value: "outros",

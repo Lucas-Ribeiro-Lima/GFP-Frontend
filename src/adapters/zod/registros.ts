@@ -29,7 +29,7 @@ export const rendaFormSchema =  z.object({
   modalidade: z.enum(['fixo', 'variavel']),
   fonte: z.string(),
   frequencia: z.enum(['mensal', 'trimestral', 'semestral', 'anual']),
-  categoria: z.enum(['salario', 'aluguel', 'premio', 'outros'])
+  categoria: z.enum(['salario', 'investimento', 'bonus', 'outros'])
 })
 
 
