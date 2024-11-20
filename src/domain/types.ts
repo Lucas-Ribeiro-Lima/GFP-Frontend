@@ -12,6 +12,7 @@ export type ContaProps = {
   email: string,
   nome: string,
   cpf?: string,
+  photo?: string,
   configs: ConfigsProps
 }
 
