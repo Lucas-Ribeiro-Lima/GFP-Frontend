@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getMonthIndex } from "@/lib/utils"
 
 type FormComponentsProps = {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any
   fieldName: string
   label?: string

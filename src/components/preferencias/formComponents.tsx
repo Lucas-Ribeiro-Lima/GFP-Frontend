@@ -4,8 +4,8 @@ import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/for
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-//eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FormProps = {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any
   fieldName: string
   label: string
@@ -36,6 +36,7 @@ export function PreferenciasInputFormField({ form, fieldName, label, type, readO
 }
 
 type PreferenciasSwitchFormFieldProps = {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any
   fieldName: string
   label: string
