@@ -2,8 +2,9 @@
 
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FormProps = {
   form: any
   fieldName: string
@@ -38,10 +39,10 @@ type PreferenciasSwitchFormFieldProps = {
   form: any
   fieldName: string
   label: string
-  checkedOption: string
+  options: string[]
 }
 
-export function PreferenciasSwitchFormField({ form, fieldName, label, checkedOption }: Readonly<PreferenciasSwitchFormFieldProps>) {
+export function PreferenciasSwitchFormField({ form, fieldName, label, options }: Readonly<PreferenciasSwitchFormFieldProps>) {
   return(
     <FormField
       control={form.control}
@@ -51,13 +52,18 @@ export function PreferenciasSwitchFormField({ form, fieldName, label, checkedOpt
           <FormLabel htmlFor={fieldName}>
             <span className="text-slate-500/50" hidden>{label}</span>
           </FormLabel>
-          <FormControl>
-            <div className='flex items-center space-x-4'>
-              <span className="text-slate-500/50">Light</span>
-              <Switch className="bg-slate-200" checked={fieldName === checkedOption}></Switch>
-              <span className="text-slate-500/50">Dark</span>
-            </div>
-          </FormControl>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder={"Tema"}/>
+                </SelectTrigger>
+            </FormControl>
+            <SelectContent >
+              {options.map((option, index) => (
+                <SelectItem key={index} value={option}>{option}</SelectItem>)
+              )}
+            </SelectContent>
+          </Select>
         </FormItem>
       )}
     />

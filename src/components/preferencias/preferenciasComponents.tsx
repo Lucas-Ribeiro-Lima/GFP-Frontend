@@ -40,6 +40,7 @@ export function PreferenciasForm() {
     }
   })
 
+  
   return(
     <Form {...form} >
       <form className="flex flex-col justify-center space-y-4"> 
@@ -51,8 +52,9 @@ export function PreferenciasForm() {
         <PreferenciasSwitchFormField 
           form={form} 
           fieldName="configs.tema" 
-          label="Tema" 
-          checkedOption="Dark"/>
+          label="Tema"
+          options={["Light", "Dark", "System"]}
+          />
       </form>
     </Form>
   )
