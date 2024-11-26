@@ -154,91 +154,89 @@ type ActionsRowProps<T> = {
 }
 
 export function RendaActionRows({ editSubmit, deleteSubmit }: Readonly<ActionsRowProps<RendaProps>>) {
-	 const row = ({ row }: { row: Row<RendaProps>}) => {
-		const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
-
-		const renda = row.original
-		return (
-			<Dialog>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
-							<MoreHorizontal className="h-4 w-4 " />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DialogTrigger asChild onClick={() => setModalOption("edit")}>
-							<DropdownMenuItem  className="cursor-pointer">
-									Editar
-							</DropdownMenuItem>
-						</DialogTrigger>
-						<DropdownMenuSeparator />
-						<DialogTrigger asChild onClick={() => setModalOption("delete")}>
-							<DropdownMenuItem
-								className="
-									bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
-									focus-visible:text-white text-white
-									cursor-pointer"
-							>
-								Excluir
-							</DropdownMenuItem>
-						</DialogTrigger>
-					</DropdownMenuContent>
-					{ modalOption === "delete" && (
-						<Registro.TableComponents.DialogDelete uuid={renda.uuid} service={deleteSubmit}/>
-					)}
-					{ modalOption === "edit" && (
-						<Registro.TableComponents.DialogContent type="Edição" title="rendas">
-							<Registro.RendaForm renda={renda} service={editSubmit}/>
-						</Registro.TableComponents.DialogContent>
-					)}
-				</DropdownMenu>
-			</Dialog>
-		)}
+	const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
+	const row = ({ row }: { row: Row<RendaProps>}) => {
+	const renda = row.original
+	return (
+		<Dialog>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
+						<MoreHorizontal className="h-4 w-4 " />
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent align="end">
+					<DialogTrigger asChild onClick={() => setModalOption("edit")}>
+						<DropdownMenuItem  className="cursor-pointer">
+								Editar
+						</DropdownMenuItem>
+					</DialogTrigger>
+					<DropdownMenuSeparator />
+					<DialogTrigger asChild onClick={() => setModalOption("delete")}>
+						<DropdownMenuItem
+							className="
+								bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
+								focus-visible:text-white text-white
+								cursor-pointer"
+						>
+							Excluir
+						</DropdownMenuItem>
+					</DialogTrigger>
+				</DropdownMenuContent>
+				{ modalOption === "delete" && (
+					<Registro.TableComponents.DialogDelete uuid={renda.uuid} service={deleteSubmit}/>
+				)}
+				{ modalOption === "edit" && (
+					<Registro.TableComponents.DialogContent type="Edição" title="rendas">
+						<Registro.RendaForm renda={renda} service={editSubmit}/>
+					</Registro.TableComponents.DialogContent>
+				)}
+			</DropdownMenu>
+		</Dialog>
+	)}
 	return row
 }
 
 export function DespesaActionRows({ editSubmit, deleteSubmit }: Readonly<ActionsRowProps<DespesaProps>>) {
+	const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
 	const row =  ({ row }: { row: Row<DespesaProps>}) => {
-		const [ modalOption, setModalOption ] = useState<"edit" | "delete">("edit")
-
-		const despesa = row.original
-		return (
-			<Dialog>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
-							<MoreHorizontal className="h-4 w-4 " />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DialogTrigger asChild onClick={() => setModalOption("edit")}>
-							<DropdownMenuItem  className="cursor-pointer">
-									Editar
-							</DropdownMenuItem>
-						</DialogTrigger>
-						<DropdownMenuSeparator />
-						<DialogTrigger asChild onClick={() => setModalOption("delete")}>
-							<DropdownMenuItem
-								className="
-									bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
-									focus-visible:text-white text-white
-									cursor-pointer"
-							>
-								Excluir
-							</DropdownMenuItem>
-						</DialogTrigger>
-					</DropdownMenuContent>
-					{ modalOption === "delete" && (
-						<Registro.TableComponents.DialogDelete uuid={despesa.uuid} service={deleteSubmit}/>
-					)}
-					{ modalOption === "edit" && (
-						<Registro.TableComponents.DialogContent type="Edição" title="rendas">
-							<Registro.DespesaForm despesa={despesa} service={editSubmit}/>
-						</Registro.TableComponents.DialogContent>
-					)}
-				</DropdownMenu>
-			</Dialog>
-		)}
+	const despesa = row.original
+	return (
+		<Dialog>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant="ghost" className="h-8 w-8 p-0 hover:text-sky-500 focus-visible:ring-0">
+						<MoreHorizontal className="h-4 w-4 " />
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent align="end">
+					<DialogTrigger asChild onClick={() => setModalOption("edit")}>
+						<DropdownMenuItem  className="cursor-pointer">
+								Editar
+						</DropdownMenuItem>
+					</DialogTrigger>
+					<DropdownMenuSeparator />
+					<DialogTrigger asChild onClick={() => setModalOption("delete")}>
+						<DropdownMenuItem
+							className="
+								bg-red-500 focus-visible:bg-red-500/90 hover:bg-red-500/90
+								focus-visible:text-white text-white
+								cursor-pointer"
+						>
+							Excluir
+						</DropdownMenuItem>
+					</DialogTrigger>
+				</DropdownMenuContent>
+				{ modalOption === "delete" && (
+					<Registro.TableComponents.DialogDelete uuid={despesa.uuid} service={deleteSubmit}/>
+				)}
+				{ modalOption === "edit" && (
+					<Registro.TableComponents.DialogContent type="Edição" title="rendas">
+						<Registro.DespesaForm despesa={despesa} service={editSubmit}/>
+					</Registro.TableComponents.DialogContent>
+				)}
+			</DropdownMenu>
+		</Dialog>
+	)}
 	return row
 }

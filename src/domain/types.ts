@@ -1,3 +1,4 @@
+import { contaSchema } from "@/adapters/zod/conta"
 import { despesaFormSchema, registroSchema, rendaFormSchema } from "@/adapters/zod/registros"
 import { z } from "zod"
 
@@ -7,20 +8,7 @@ export type AuthContextProps =  {
   logoff: () => void
 }
 
-export type ContaProps = {
-  id: number,
-  email: string,
-  nome: string,
-  cpf?: string,
-  photo?: string,
-  configs: ConfigsProps
-}
-
-export type ConfigsProps = {
-  tema: "Dark" | "Light",
-  displayName: string,
-  customWpp: string
-}
+export type ContaProps = z.infer<typeof contaSchema> 
 
 export type CarteiraProps = {
   id: number, 

@@ -6,13 +6,15 @@ import { RegistrosSkeleton } from '../registros/registrosComponents';
 import { DashboardPageSkeleton } from './dashboard';
 import { LayoutSkeleton } from "./layout";
 import { RegistrosPageSkeleton } from './registro';
+import { PreferenciasAvatarSkeleton } from './Preferencias';
 
 export const SkeletonComponents = {
   Base: BaseSkeleton,
   Navbar: NavSkeleton,
   Header: HeaderSkeleton,
   Dashboard: DashboardSkeleton,
-  Registros: RegistrosSkeleton
+  Registros: RegistrosSkeleton,
+  PreferenciasAvatar: PreferenciasAvatarSkeleton
 }
 
 export const SkeletonPages = {
