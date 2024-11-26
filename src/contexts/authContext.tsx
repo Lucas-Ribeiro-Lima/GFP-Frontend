@@ -16,7 +16,7 @@ export function AuthProvider({ children, userService }: Readonly<AuthProviderPro
   const [ user, setUser ] = useState<ContaProps | null>(null)
   
   const userInitials = useMemo(
-    () => user?.nome?.replace(/(\b\w)\w*.*\b(\w)\w*/g, '$1$2').toUpperCase() || "CN"
+    () => user?.nome?.replace(/^(\w)\w{1,9} {0,2}(?:(\w)\w{0,9})?$/, '$1$2').toUpperCase() ?? "CN"
   ,[user])
 
 

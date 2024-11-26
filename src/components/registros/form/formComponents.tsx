@@ -86,8 +86,8 @@ export function CategoriaSelector({ form, fieldName, label, description, valores
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {valores.map(({value, label}, index) => (
-                <SelectItem key={index} value={value}>{label}</SelectItem>
+              {valores.map(({value, label}) => (
+                <SelectItem key={value} value={value}>{label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -191,7 +191,7 @@ export function CompetenciaSelector({ form }: Readonly<FormComponentsProps>) {
               </FormControl>
               <SelectContent>
                 {meses.map((month, index) => (
-                  <SelectItem key={index} value={(index + 1).toString()}>{month}</SelectItem>
+                  <SelectItem key={month} value={(index + 1).toString()}>{month}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

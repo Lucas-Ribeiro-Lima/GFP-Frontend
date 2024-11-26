@@ -5,7 +5,7 @@ import { z } from "zod"
 export type AuthContextProps =  {
   user: ContaProps
   userInitials: string
-  logoff: () => void
+  logoff: () => Promise<void>
 }
 
 export type ContaProps = z.infer<typeof contaSchema> 
