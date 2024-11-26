@@ -6,7 +6,7 @@ COPY .next ./.next
 COPY public ./public
 COPY package.json ./
 
-RUN yarn install --production
+RUN yarn install --ignore-scripts --production
 
 EXPOSE 3000
 
