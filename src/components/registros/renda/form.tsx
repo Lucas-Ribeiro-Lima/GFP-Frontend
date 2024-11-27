@@ -33,7 +33,7 @@ export function RendaForm({ renda, service }: Readonly<RendaFormProps>) {
       frequencia: renda?.frequencia ?? "mensal",
       modalidade: renda?.modalidade ?? "fixo",
       competencia: {
-        mes: renda?.competencia.mes ?? new Date().getMonth(),
+        mes: renda?.competencia.mes ?? new Date().getMonth() + 1,
         ano: renda?.competencia.ano ?? new Date().getFullYear(),
         dataInclusao: renda?.competencia.dataInclusao ?? new Date().toLocaleDateString("pt-BR")
       }

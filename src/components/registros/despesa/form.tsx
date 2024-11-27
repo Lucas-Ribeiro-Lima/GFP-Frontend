@@ -31,7 +31,7 @@ export function DespesaForm({ despesa, service }: Readonly<DespesaFormProps>) {
       parcelado: despesa?.parcelado ?? false,
       modalidade: despesa?.modalidade ?? "fixo",
       competencia: {
-        mes: despesa?.competencia.mes ?? new Date().getMonth(),
+        mes: despesa?.competencia.mes ?? new Date().getMonth() + 1,
         ano: despesa?.competencia.ano ?? new Date().getFullYear(),
         dataInclusao: despesa?.competencia.dataInclusao ?? new Date().toLocaleDateString("pt-BR")
       }

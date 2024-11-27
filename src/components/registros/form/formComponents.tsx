@@ -183,7 +183,7 @@ export function CompetenciaSelector({ form }: Readonly<FormComponentsProps>) {
               <FormLabel>Mês</FormLabel>
             </div>
             <FormDescription>Mês:</FormDescription>
-            <Select onValueChange={(val) => field.onChange(Number(val))} defaultValue={(field.value + 1).toString()}>
+            <Select onValueChange={(val) => field.onChange(Number(val))} defaultValue={(field.value).toString()}>
               <FormControl className="bg-white">
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione o mês"/>
