@@ -24,18 +24,18 @@ export function RendaForm({ renda, service }: Readonly<RendaFormProps>) {
   const form = useForm<RendaProps>({
     resolver: zodResolver(rendaFormSchema),
     defaultValues: {
-      uuid: renda?.uuid || "00000000-0000-0000-0000-000000000000",
-      idCarteira: id || undefined,
-      descricao: renda?.descricao ||"",
-      fonte: renda?.fonte || "",
-      valor: renda?.valor || 0.00,
-      categoria: renda?.categoria || "outros",
-      frequencia: renda?.frequencia || "mensal",
-      modalidade: renda?.modalidade || "fixo",
+      uuid: renda?.uuid ?? "00000000-0000-0000-0000-000000000000",
+      idCarteira: id ?? undefined,
+      descricao: renda?.descricao ??"",
+      fonte: renda?.fonte ?? "",
+      valor: renda?.valor ?? 0.00,
+      categoria: renda?.categoria ?? "outros",
+      frequencia: renda?.frequencia ?? "mensal",
+      modalidade: renda?.modalidade ?? "fixo",
       competencia: {
-        mes: renda?.competencia.mes || new Date().getMonth(),
-        ano: renda?.competencia.ano || new Date().getFullYear(),
-        dataInclusao: renda?.competencia.dataInclusao || new Date().toLocaleDateString("pt-BR")
+        mes: renda?.competencia.mes ?? new Date().getMonth(),
+        ano: renda?.competencia.ano ?? new Date().getFullYear(),
+        dataInclusao: renda?.competencia.dataInclusao ?? new Date().toLocaleDateString("pt-BR")
       }
     },
 

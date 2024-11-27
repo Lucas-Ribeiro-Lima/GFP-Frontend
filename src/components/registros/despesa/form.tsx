@@ -22,18 +22,18 @@ export function DespesaForm({ despesa, service }: Readonly<DespesaFormProps>) {
   const form = useForm<DespesaProps>({
     resolver: zodResolver(despesaFormSchema),
     defaultValues: {
-      uuid: despesa?.uuid || "00000000-0000-0000-0000-000000000000",
-      idCarteira: id || undefined,
-      descricao: despesa?.descricao ||"",
-      valor: despesa?.valor || 0.00,
-      categoria: despesa?.categoria || "outros",
-      numParcelas: despesa?.numParcelas || 1,
-      parcelado: despesa?.parcelado || false,
-      modalidade: despesa?.modalidade || "fixo",
+      uuid: despesa?.uuid ?? "00000000-0000-0000-0000-000000000000",
+      idCarteira: id ?? undefined,
+      descricao: despesa?.descricao ?? "",
+      valor: despesa?.valor ?? 0.00,
+      categoria: despesa?.categoria ?? "outros",
+      numParcelas: despesa?.numParcelas ?? 1,
+      parcelado: despesa?.parcelado ?? false,
+      modalidade: despesa?.modalidade ?? "fixo",
       competencia: {
-        mes: despesa?.competencia.mes || new Date().getMonth(),
-        ano: despesa?.competencia.ano || new Date().getFullYear(),
-        dataInclusao: despesa?.competencia.dataInclusao || new Date().toLocaleDateString("pt-BR")
+        mes: despesa?.competencia.mes ?? new Date().getMonth(),
+        ano: despesa?.competencia.ano ?? new Date().getFullYear(),
+        dataInclusao: despesa?.competencia.dataInclusao ?? new Date().toLocaleDateString("pt-BR")
       }
     },
 
