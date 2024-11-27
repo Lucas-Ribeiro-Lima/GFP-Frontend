@@ -13,10 +13,9 @@ export function ColumnsDespesa({ editSubmit, deleteSubmit }: Readonly<ColumsDesp
    {
     accessorKey: 'uuid',
     header: () => {},
-    cell: (cell) => {
-      const uuid = String(cell.getValue())
+    cell: () => {
       return (
-        <Registro.TableComponents.Link uuid={uuid}/>
+        <Registro.TableComponents.Link/>
       )
     }
    },

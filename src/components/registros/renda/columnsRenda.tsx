@@ -14,10 +14,9 @@ export function ColumsRenda({ editSubmit, deleteSubmit }: Readonly<ColunsRendaPr
 		{
 		accessorKey: 'uuid',
 		header: () => {},
-		cell: (cell) => {
-			const uuid = String(cell.getValue())
+		cell: () => {
 			return (
-				<Registro.TableComponents.Link uuid={uuid}/>
+				<Registro.TableComponents.Link/>
 			)
 		}
 		},

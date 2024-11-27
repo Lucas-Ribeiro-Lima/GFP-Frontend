@@ -6,8 +6,12 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { DespesaProps, RendaProps } from "@/domain/types";
+import { Row, Table } from "@tanstack/react-table";
+import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { useCallback, useState } from "react";
+import { Registro } from ".";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import {
 	Dialog,
 	DialogContent as DialogContentShadcn,
@@ -17,17 +21,13 @@ import {
 	DialogTitle,
 	DialogTrigger
 } from "../ui/dialog";
-import { Row, Table } from "@tanstack/react-table";
-import { ChevronDown, MoreHorizontal } from "lucide-react";
-import { DespesaProps, RendaProps } from "@/domain/types";
-import Link from "next/link";
-import { useCallback, useState } from "react";
-import { Registro } from ".";
+import { Input } from "../ui/input";
 
-export function LinkCell({ uuid }: Readonly<{ uuid: string }>) {
+
+
+export function LinkCell() {
 	return(
-		<Link 
-		href={`/registros/renda/${uuid}`} 
+		<div 
 		className="
 			flex items-center
 			w-2/5 aspect-square rounded-full
