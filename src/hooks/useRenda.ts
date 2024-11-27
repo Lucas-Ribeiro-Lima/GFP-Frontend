@@ -1,10 +1,10 @@
 import { RendaProps } from "@/domain/types"
-import { RendaService } from "@/services/registroService"
+import { RegistroContract } from "@/services/registroService"
 import { useState, useEffect, useCallback } from "react"
 import { useCustomToast } from "./useCustomToast"
 import { ColumsRenda } from "@/components/registros/renda/columnsRenda"
 
-export function useRenda(service: RendaService) {
+export function useRenda(service: Readonly<RegistroContract<RendaProps>>) {
   const { toaster } = useCustomToast()
   const [ rendas, setRendas ] = useState<RendaProps[]>([])
   const [ valorTotal, setValorTotal ] = useState<number>(0)

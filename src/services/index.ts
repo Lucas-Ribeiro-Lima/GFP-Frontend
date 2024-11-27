@@ -1,8 +1,9 @@
 'use client'
 
 import { httpClient } from "@/adapters";
+import { DespesaProps, RendaProps } from "@/domain/types";
 import { CarteiraService } from "./carteiraService";
-import { DespesaService, RendaService } from "./registroService";
+import { RegistroService } from "./registroService";
 import { UserService } from "./userService";
 
 
@@ -14,5 +15,5 @@ export type ServiceResponse = {
 
 export const userService = new UserService(httpClient.axios)
 export const carteiraService = new CarteiraService(httpClient.axios)
-export const rendaService = new RendaService(httpClient.axios)
-export const despesaService = new DespesaService(httpClient.axios)
+export const rendaService = new RegistroService<RendaProps>(httpClient.axios, "renda")
+export const despesaService = new RegistroService<DespesaProps>(httpClient.axios, "despesa")

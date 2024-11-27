@@ -1,29 +1,27 @@
 import { HttpClient } from "@/adapters/httpClient"
-import { DespesaProps, RendaProps } from "@/domain/types"
 import { ServiceResponse } from "."
 
+type RegistroType = "renda" | "despesa" 
 
-export interface RendaContract {
-  load: () => Promise<RendaProps[] | []>
-  create: (data: RendaProps) => Promise<ServiceResponse>
-  patch: (data: RendaProps) => Promise<ServiceResponse>
+export interface RegistroContract<T> {
+  load: () => Promise<T[] | []>
+  create: (data: T) => Promise<ServiceResponse>
+  patch: (data: T) => Promise<ServiceResponse>
   delete: (uuid: string) => Promise<ServiceResponse>
 }
 
-export interface DespesaContract {
-  load: () => Promise<DespesaProps[] | []>
-  create: (data: DespesaProps) => Promise<ServiceResponse>
-  patch: (data: DespesaProps) => Promise<ServiceResponse>
-  delete: (uuid: string) => Promise<ServiceResponse>
-}
+export class RegistroService<T> implements RegistroContract<T> {
+  private readonly client:HttpClient
+  private readonly recurso: RegistroType
+  constructor(client: HttpClient, recurso: RegistroType) {
+    this.client = client
+    this.recurso = recurso
+  }
 
-export class RendaService implements RendaContract {
-  constructor(private readonly client: HttpClient) {}
-
-  async load(): Promise<RendaProps[] | []> {
-    const { status, data } = await this.client.request<RendaProps[] | []>({
+  async load(): Promise<T[] | []> {
+    const { status, data } = await this.client.request<T[] | []>({
       method: "GET",
-      url: "/renda/buscar"
+      url: `/${this.recurso}/buscar`
     })
 
     if(!data) {
@@ -33,53 +31,54 @@ export class RendaService implements RendaContract {
       return data 
     } else {
       return []
-    } 
+    }
   }
 
-  async create(data: RendaProps): Promise<ServiceResponse> {
+  async create(data:T): Promise<ServiceResponse> {
     const { status } = await this.client.request({
       method: "POST",
-      url: "/renda/criar",
+      url: `/${this.recurso}/criar`,
       content: {
-        renda: data
+        [this.recurso]: data
       }
     })
 
     if(status === 201) {
       return {
         type: "success",
-        message: "Renda cadastrada com sucesso"
+        message: `${this.recurso} cadastrada com sucesso`
       }
     } else {
       return {
         type: "error",
-        message: "Erro ao cadastrar renda"
+        message: `Erro ao cadastrar ${this.recurso}`	
       }
     }
   }
 
-  async patch(data: RendaProps): Promise<ServiceResponse> {
+  async patch(data: T): Promise<ServiceResponse> {
     const { status } = await this.client.request({
       method: "PATCH",
-      url: "/renda/atualizar",
+      url: `/${this.recurso}/atualizar`,
       content: {
-        renda: data
+        [this.recurso]: data
       }
     })
 
     if(status === 200) {
       return {
-        type: "success",
-        message: "Renda atualizada com sucesso"
+        type: `success`,
+        message: `${this.recurso} atualizada com sucesso`
       }
     } else {
       return {
-        type: "error",
-        message: "Erro ao atualizar renda"
+        type: `error`,
+        message: `Erro ao atualizar ${this.recurso}`
       }
     }
   }
-  
+
+
   async delete(uuid: string): Promise<ServiceResponse> {
     const body = {
       uuid
@@ -87,108 +86,19 @@ export class RendaService implements RendaContract {
 
     const { status } = await this.client.request({
       method: "DELETE",
-      url: "/renda/excluir",
+      url: `/${this.recurso}/excluir`,
       content: body
     })
 
     if(status === 204) {
       return {
-        type: "success",
-        message: "Renda excluida com sucesso"
+        type: `success`,
+        message: `${this.recurso} excluida com sucesso`
       }
     } else {
       return {
-        type: "error",
-        message: "Erro ao excluir renda"
-      }
-    }
-  }
-}
-
-
-export class DespesaService implements DespesaContract {
-  constructor(private readonly client: HttpClient) {}
-
-  async load(): Promise<DespesaProps[] | []> {
-    const { status, data } = await this.client.request<DespesaProps[] | []>({
-      method: "GET",
-      url: "/despesa/buscar"
-    })
-
-    if(!data) {
-      return []
-    }
-    if(status === 200 ) {
-      return data 
-    } else {
-      return []
-    } 
-  }
-
-  async create(data: DespesaProps): Promise<ServiceResponse> {
-    const { status } = await this.client.request({
-      method: "POST",
-      url: "/despesa/criar",
-      content: {
-        despesa: data
-      }
-    })
-
-    if(status === 201) {
-      return {
-        type: "success",
-        message: "Despesa cadastrada com sucesso"
-      }
-    } else {
-      return {
-        type: "error",
-        message: "Erro ao cadastrar Despesa"
-      }
-    }
-  }
-
-  async patch(data: DespesaProps): Promise<ServiceResponse> {
-    const { status } = await this.client.request({
-      method: "PATCH",
-      url: "/despesa/atualizar",
-      content: {
-        despesa: data
-      }
-    })
-
-    if(status === 200) {
-      return {
-        type: "success",
-        message: "Despesa atualizada com sucesso"
-      }
-    } else {
-      return {
-        type: "error",
-        message: "Erro ao atualizar Despesa"
-      }
-    }
-  }
-  
-  async delete(uuid: string): Promise<ServiceResponse> {
-    const body = {
-      uuid
-    }
-
-    const { status } = await this.client.request({
-      method: "DELETE",
-      url: "/despesa/excluir",
-      content: body
-    })
-
-    if(status === 204) {
-      return {
-        type: "success",
-        message: "Despesa excluida com sucesso"
-      }
-    } else {
-      return {
-        type: "error",
-        message: "Erro ao excluir despesa"
+        type: `error`,
+        message: `Erro ao excluir ${this.recurso}`
       }
     }
   }

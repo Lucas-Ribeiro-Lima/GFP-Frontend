@@ -1,10 +1,10 @@
 import { DespesaProps } from "@/domain/types"
-import { DespesaService } from "@/services/registroService"
+import { RegistroContract } from "@/services/registroService"
 import { useCallback, useEffect, useState } from "react"
 import { useCustomToast } from "./useCustomToast"
 import { ColumnsDespesa } from "@/components/registros/despesa/columnsDespesa"
 
-export function useDespesa(service: DespesaService) {
+export function useDespesa(service: Readonly<RegistroContract<DespesaProps>>) {
   const { toaster } = useCustomToast()
   const [ despesas, setDespesas ] = useState<DespesaProps[]>([])
   const [ valorTotal, setValorTotal ] = useState<number>(0)
