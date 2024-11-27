@@ -23,7 +23,7 @@ export const rendaFormSchema =  z.object({
   valor: z.coerce.number({message: "Insira um valor para a renda"}),
   competencia: z.object({
     mes: z.number(),
-    ano: z.number(),
+    ano: z.coerce.number(),
     dataInclusao: z.string()
   }),
   modalidade: z.enum(['fixo', 'variavel']),
@@ -40,7 +40,7 @@ export const despesaFormSchema =  z.object({
   valor: z.coerce.number(),
   competencia: z.object({
     mes: z.number(),
-    ano: z.number(),
+    ano: z.coerce.number(),
     dataInclusao: z.string()
   }),
   modalidade: z.enum(['fixo', 'variavel']),
