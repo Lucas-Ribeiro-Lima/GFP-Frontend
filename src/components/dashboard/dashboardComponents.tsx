@@ -72,9 +72,9 @@ type DashboardResumeIconProps = {
 
 export function DashboardTotalIcon({ variant }: Readonly<DashboardResumeIconProps> ) {
   const icon = {
-    "Renda": <DollarSign className="h-full w-full text-green-400 bg-green-900/90 rounded-sm" />,
-    "Despesa": <DollarSign className="h-full w-full text-red-400 bg-red-900/90 rounded-sm" />,
-    "Total": <CircleCheck className="h-full w-full text-sky-400 bg-sky-900/90 rounded-sm" />
+    "Renda": <DollarSign aria-label="img" className="h-full w-full text-green-400 bg-green-900/90 rounded-sm" />,
+    "Despesa": <DollarSign aria-label="img" className="h-full w-full text-red-400 bg-red-900/90 rounded-sm" />,
+    "Total": <CircleCheck aria-label="img" className="h-full w-full text-sky-400 bg-sky-900/90 rounded-sm" />
   }
 
   return (
