@@ -28,14 +28,14 @@ export function PreferenciasForm() {
   const form = useForm<ContaProps>({
     resolver: zodResolver(contaSchema),
     defaultValues: {
-      id: user.id || undefined,
-      nome: user.nome || "",
-      cpf: user.cpf || "",
-      email: user.email || "",
+      id: user.id ?? undefined,
+      nome: user.nome ?? "",
+      cpf: user.cpf ?? "",
+      email: user.email ?? "",
       configs: {
-        displayName: user.configs.displayName || "",
-        tema: user.configs.tema || "Light",
-        customWpp: user.configs.customWpp || "",
+        displayName: user.configs.displayName ?? "",
+        tema: user.configs.tema ?? "Light",
+        customWpp: user.configs.customWpp ?? "",
       }
     }
   })
